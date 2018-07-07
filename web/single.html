@@ -32,9 +32,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- //for bootstrap working -->
 	<link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,300,300i,400,400i,500,500i,600,600i,700,800" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700" rel="stylesheet">
+
+	<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+
+  <!-- CodeMirror and its JavaScript mode file -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/mode/javascript/javascript.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css" />
+
+  <!-- Firepad -->
+  <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
+  <script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
+  <style>
+    /* Height / width / positioning can be customized for your use case.
+       For demo purposes, we make firepad fill the entire browser. */
+    .firepad {
+      height: 700px;
+    }
+  </style>
 </head>
 
-<body>
+<body onload="init()">
 	<div class="top_header" id="home">
 		<!-- Fixed navbar -->
 		<nav class="navbar navbar-default navbar-fixed-top">
@@ -87,9 +105,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="comment-bottom">
 							<form action="#" method="post">
 
-								<textarea name="Message" placeholder="Code..." required="" style="
+								<div id = "firepad-container" name="Message" placeholder="Code..." required="" style="
 								min-height: 1200px;color:#333333
-							"></textarea>
+							"></div>
 							</form>
 						</div>
 					</div>
@@ -233,23 +251,54 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			$(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
 		});
 	</script>
-	<script type="text/javascript">
-		$(document).ready(function () {
-			/*
-									var defaults = {
-							  			containerID: 'toTop', // fading element id
-										containerHoverID: 'toTopHover', // fading element hover id
-										scrollSpeed: 1200,
-										easingType: 'linear' 
-							 		};
-									*/
+	<script type="text/javascript">	
 
-			$().UItoTop({
-				easingType: 'easeOutQuart'
-			});
+	setTimeout(function(){ 
+		$('.powered-by-firepad').remove()
+			 }, 3000);
 
-		});
 	</script>
+	 <script>
+		function init() {
+		  //// Initialize Firebase.
+		  //// TODO: replace with your Firebase project configuration.
+		  var config = {
+			apiKey: "AIzaSyC_JdByNm-E1CAJUkePsr-YJZl7W77oL3g",
+			authDomain: "firepad-tests.firebaseapp.com",
+			databaseURL: "https://firepad-tests.firebaseio.com"
+		  };
+		  firebase.initializeApp(config);
+		  //// Get Firebase Database reference.
+		  var firepadRef = getExampleRef();
+		  //// Create CodeMirror (with line numbers and the JavaScript mode).
+		  var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
+			lineNumbers: true,
+			mode: 'javascript'
+		  });
+		  //// Create Firepad.
+		  var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
+			defaultText: 'Put your code here'
+		  });
+		  
+		}
+		// Helper to get hash from end of URL or generate a random one.
+		function getExampleRef() {
+		  var ref = firebase.database().ref();
+		  var hash = window.location.hash.replace(/#/g, '');
+		  if (hash) {
+			ref = ref.child(hash);
+		  } else {
+			ref = ref.push(); // generate unique location.
+			window.location = window.location + '#' + ref.key; // add it as a hash to the URL.
+		  }
+		  if (typeof console !== 'undefined') {
+			console.log('Firebase data: ', ref.toString());
+		  }
+		  return ref;
+		}
+
+		
+	  </script>
 
 	<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 
