@@ -7,7 +7,7 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/web/index.html'));
 });
 
-app.use(express.static('web'));
+app.use(express.static(__dirname +'/web'));
 
 var port = process.env.PORT || 1337;
 app.listen(port);
