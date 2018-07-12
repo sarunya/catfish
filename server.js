@@ -9,4 +9,4 @@ app.get('/', function(req, res) {
 
 app.use(express.static('web'));
 
-app.listen(8086);
+app.listen(8080);
