@@ -1,0 +1,103 @@
+<style>
+    /* Split the screen in half */
+
+    .split {
+        height: 90%;
+        width: 50%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    /* Control the left side */
+
+    .left {
+        left: 0;
+        background-color: bisque;
+        overflow: scroll;
+    }
+
+    /* Control the right side */
+
+    .right {
+        right: 0;
+        background-color: white;
+        overflow: scroll;
+    }
+
+    /* If you want the content centered horizontally and vertically */
+
+    .centered {
+        position: absolute;
+        top: 5%;
+        left: 10%;
+        text-align: left;
+    }
+
+    pre {
+        counter-reset: line;
+    }
+
+    code {
+        counter-increment: line;
+    }
+
+    code:before {
+        content: counter(line);
+        display: inline-block;
+        width: 1.0em;
+        /* Fixed width */
+        border-right: 2px solid #ddd;
+        padding: 0 .5em;
+        margin-right: .5em;
+        color: #888;
+        -webkit-user-select: none;
+    }
+
+    .bottom {
+        height: 10%;
+        width: 50%;
+        position: fixed;
+        z-index: 90%;
+        top: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+</style>
+<html>
+
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="./lib/service/assertion.js"></script>
+    <script type="text/javascript" src="require.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor/dist/jsoneditor.min.js"></script>
+</head>
+<div class="split left">
+    <div class="centered">
+        <textarea rows="40" cols="80" id="actual">
+        </textarea>
+        <br/>
+        <br/>
+        <button onclick="compare()">COMPARE</button>
+    </div>
+</div>
+
+<div class="split right">
+    <div class="centered">
+        <textarea rows="40" cols="80" id="expected">
+        </textarea>
+        <br/>
+        <br/>
+        <button onclick="validateJson()">VALIDATE</button>
+    </div>
+</div>
+<script>
+    let actual = document.getElementById("actual").value;
+    let expected = document.getElementById("expected").value;
+    compare(actual, expected);
+</script>
+
+</html>
