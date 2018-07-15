@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Array Comparison</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="./css/array-comparison.css">
+    <script type="text/javascript"  src="./js/array-compare.js"></script>
+</head>
+
+<body>
+    <div>
+        <div id="checkboxdiv">
+            <input type="checkbox" name="types" value="spaces"> <label>spaces</label>
+            <input type="checkbox" name="types" value="case"> <label>Case-insensitive</label>
+            <input type="checkbox" name="types" value="duplicates"> <label>Remove duplicates</label>
+        </div>
+        <div class="splithigh left">
+            <p>Array1: </p>
+            <textarea id="array1"></textarea>
+        </div>
+        <div class="splithigh centered">
+            <p>Array1 Only: </p>
+            <textarea id="array1only"></textarea>
+        </div>
+        <div class="splithigh right">
+            <p>Array1 or Array2: </p>
+            <textarea id="array1or2"></textarea>
+        </div>
+        </br>
+        <div class="splitlow left">
+            <p>Array2: </p>
+            <textarea id="array2"></textarea>
+        </div>
+        <div class="splitlow centered">
+            <p>Array2 Only: </p>
+            <textarea id="array2only"></textarea>
+        </div>
+        <div class="splitlow right">
+            <p>Array1 and Array2: </p>
+            <textarea id="array1and2"></textarea>
+        </div>
+        <button id="compare" onclick="comparethis()">COMPARE</button>
+    </div>
+</body>
+
+</html>
