@@ -3,11 +3,8 @@ var app = express();
 var path = require('path');
 
 // viewed at http://localhost:8080
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/web/index.html'));
-});
 
-app.use(express.static(__dirname +'/web'));
+app.use(express.static(path.join(__dirname, 'web')))
 
 var port = process.env.PORT || 1337;
 app.listen(port);
