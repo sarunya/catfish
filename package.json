@@ -2,7 +2,7 @@
   "name": "devlocker",
   "version": "0.0.0",
   "description": "Dev locker Service",
-  "main": "app.js",
+  "main": "index.js",
   "keywords": [
     "ecommerce",
     "api",
