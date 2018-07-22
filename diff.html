@@ -1,6 +1,6 @@
 <style>
         /* Split the screen in half */
-        .split {
+        .divideit {
         height: 100%;
         width: 50%;
         position: fixed;
@@ -11,25 +11,26 @@
         }
 
         /* Control the left side */
-        .left {
+        .leftside {
         left: 0;
         background-color: bisque;
         overflow: scroll;
         }
 
         /* Control the right side */
-        .right {
+        .rightside {
         right: 0;
         background-color: white;
         overflow: scroll;
         }
 
         /* If you want the content centered horizontally and vertically */
-        .centered {
-        position: absolute;
-        top: 5%;
-        left: 10%;
-        text-align: left;
+        .centerpos {
+            position: absolute;
+            top: 5%;
+            left: 10%;
+            width: 80%;
+            text-align: left;
         }
         pre{
             counter-reset: line;
@@ -49,17 +50,26 @@
             }
 
         </style>
-        <div class="split left">
-            <div class="centered">
-                
-                <h2>Jane Flex</h2>
-                <pre><code style="background-color: none" >{</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;a : 1,</code></br><code></code></br><code></code></br><code></code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;b : 2,</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;K : "sarunya",</code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;json1 : {</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key : 1,</code><br/><code></code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key5 : {</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g : "a",</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f : "b"</code></br><code></code></br><code></code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;}</code>,</code><br/><code style="background-color: green" >&nbsp;&nbsp;&nbsp;&nbsp;baby : "sdfd"</code><br/><code style="background-color: none" >}</code></br></pre>
-            </div>
-            </div>
+        <html>
+            <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            </head>
+            <body>
+                <div class="divideit leftside">
+                    <div class="centerpos">
+                        
+                        <h2>Jane Flex</h2>
+                        <pre><code style="background-color: none" >{</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;a : 1,</code></br><code></code></br><code></code></br><code></code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;b : 2,</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;K : "sarunya",</code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;json1 : {</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key : 1,</code><br/><code></code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key5 : {</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g : "a",</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f : "b",</code></br><code></code></br><code></code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr1 : [</code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K : "sarunya",</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;baby : "sdfds"</code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code>,</code><br/><code style="background-color: green" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/><code background-color="green" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"K": "sarunya",</code><br/><code background-color="green" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"baby": "sdfds"</code><br/><code background-color="green" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;}</code>,</code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;arr1 : [],</code><br/><code></code></br><code></code></br><code></code></br><code></code></br><code style="background-color: green" >&nbsp;&nbsp;&nbsp;&nbsp;baby : "sdfd"</code><br/><code style="background-color: none" >}</code></br></pre>
+                    </div>
+                    </div>
 
-            <div class="split right">
-            <div class="centered">
-                <h2>John Doe</h2>
-                <pre><code style="background-color: none" >{</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;a : {<br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"c": 1,</code><br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"d": 1</code><br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;}</code>,</code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;b : 2,</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;K : 2345,</code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;json1 : {</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key : 1,</code><br/><code style="background-color: green" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key2 : 2,</code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key5 : {</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g : "a",</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f : {<br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"k": 12345</code><br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;}</code>,</code><br/><code></code></br><code style="background-color: none" >}</code></br></pre>
-            </div>
-        </div>
+                    <div class="divideit rightside">
+                    <div class="centerpos">
+                        <h2>John Doe</h2>
+                        <pre><code style="background-color: none" >{</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;a : {<br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"c": 1,</code><br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"d": 1</code><br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;}</code>,</code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;b : 2,</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;K : 2345,</code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;json1 : {</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key : 1,</code><br/><code style="background-color: green" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key2 : 2,</code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key5 : {</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g : "a",</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f : {<br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"k": 12345</code><br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code>,</code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr1 : [</code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K : "sarunya",</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;baby : "sdfd"</code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></code><br/><code></code></br><code></code></br><code></code></br><code></code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;}</code>,</code><br/><code style="background-color: green" >&nbsp;&nbsp;&nbsp;&nbsp;arr1 : [<br/><code background-color="green" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1,</code><br/><code background-color="green" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2,</code><br/><code background-color="green" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3</code><br/><code background-color="green" >&nbsp;&nbsp;&nbsp;&nbsp;]</code></code><br/><code></code></br><code style="background-color: none" >}</code></br></pre>
+                    </div>
+                </div>
+            </body>
+        </html>
