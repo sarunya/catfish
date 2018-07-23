@@ -284,7 +284,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		  if (typeof console !== 'undefined') {
 			console.log('Firebase data: ', ref.toString());
 		  }
-		  let url = 'http://tinyurl.com/api-create.php?url=' +window.location.href;
+		  let url = 'http://tinyurl.com/api-create.php?url=' + encodeURIComponent(window.location.href);
 		  $("#link").attr("href", url);
 		  return ref;
 		}
