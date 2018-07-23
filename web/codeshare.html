@@ -103,7 +103,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="business">
 					
 					<div class="comment">
-						<h3>Share your code here</h3>
+						<h3>Share your code here <a id = "link" target="_blank" href = "tinyurl.com/api-create.php?url=" style="font-size: 15px">(Get short link)</a></h3>
 						<div class="comment-bottom">
 							<form action="#" method="post">
 
@@ -284,6 +284,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		  if (typeof console !== 'undefined') {
 			console.log('Firebase data: ', ref.toString());
 		  }
+		  let url = 'http://tinyurl.com/api-create.php?url=' +window.location.href;
+		  $("#link").attr("href", url);
 		  return ref;
 		}
 
