@@ -9,7 +9,7 @@
 <html>
 
 <head>
-	<title>Catfis</title>
+	<title>Catfish</title>
 	<!--/tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -283,7 +283,7 @@
 		  if (typeof console !== 'undefined') {
 			console.log('Firebase data: ', ref.toString());
 		  }
-		  let url = 'http://tinyurl.com/api-create.php?url=' + encodeURIComponent(window.location.href);
+		  let url = window.location.origin +'/get-tiny-url?url=' + encodeURIComponent(window.location.href);
 		  $("#link").attr("href", url);
 		  return ref;
 		}

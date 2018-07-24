@@ -1,15 +1,15 @@
 const express = require('express')
-const app = express()
-const db = require('./lib/data-access/pgp').db,
-  KeyValueRouteHandler = require('./lib/route-handler/key-value-route-handler');
+const app = express();
+var path = require('path');
+const TinyUrlRouteHandler = require('./lib/route-handler/tiny-url-route-handler');
 
 function start() {
   let dependencies = {};
-  dependencies.pgpPriceEngine = db("postgres://postgres:postgres@localhost/ecompricingengine", 10, 1);
-  let keyValueRouteHandler = new KeyValueRouteHandler(dependencies)
+  let tinyUrlRouteHandler = new TinyUrlRouteHandler(dependencies)
   app.use(express.json())
-  app.post('/info', (req, res) => {return keyValueRouteHandler.save(req, res)})
-  app.post('/get-info', (req, res) => {return keyValueRouteHandler.getInfo(req, res)})
-  app.listen(3000, () => console.log('Example app listening on port 3000!'))
+  app.get('/get-tiny-url', (req, res) => {return tinyUrlRouteHandler.getTinyUrl(req, res)})
+  app.use(express.static(path.join(__dirname , 'web')));
+var port = process.env.PORT || 1337;
+app.listen(port);
 }
 start();
