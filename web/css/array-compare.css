@@ -1,0 +1,100 @@
+#checkboxdiv {
+    height: 50%;
+    position: fixed;
+    /* z-index: 1; */
+    top: 5%;
+    overflow-x: hidden;
+    padding-top: 10px;
+    left: 8%;
+    padding-right: 20px;
+}
+
+#checkboxdiv label {
+    font-size: 10pt;
+    padding-right: 20px;
+}
+
+.splithigh {
+    height: 50%;
+    width: 30%;
+    position: fixed;
+    /* z-index: 1; */
+    top: 10%;
+    overflow-x: hidden;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.splitlow {
+    height: 50%;
+    width: 30%;
+    position: fixed;
+    /* z-index: 1; */
+    top: 50%;
+    overflow-x: hidden;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Control the left side */
+
+.left {
+    left: 5%;
+    /* background-color : cadetblue; */
+}
+
+/* Control the right side */
+
+.right {
+    right: 5%;
+    /* background-color: red; */
+}
+
+/* If you want the content centered horizontally and vertically */
+
+.centered {
+    /* position: absolute; */
+    left: 35%;
+    /* transform: translate(-50%, -50%); */
+    /* text-align: center; */
+}
+
+/* Style the image inside the centered container, if needed */
+
+body {
+    background-color: azure;
+}
+
+textarea {
+    /* position: absolute; */
+    width: 95%;
+    height: 60%;
+    border-width: 2px;
+    border-color: cadetblue;
+    text-align: left;
+    font-size: small;
+}
+
+button {
+    top: 91%;
+    margin-top: 90%;
+    position: absolute;
+    left: 45%;
+    /* position: fixed; */
+    background-color: cadetblue; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 5px 2px;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+p {
+    font-size: 10pt;
+}

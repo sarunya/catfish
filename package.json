@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "co": "^4.6.0",
+    "cors": "^2.8.4",
     "co-lodash": "0.0.4",
     "express": "^4.16.3",
     "got": "^7.1.0",
