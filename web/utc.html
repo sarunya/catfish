@@ -144,11 +144,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 var localDate = new Date();
                 var localMoment = moment();
                 var utcMoment = moment.utc();
-                var utcDate = new Date(utcMoment.format());
+                var utcDate = localDate.toUTCString().big();
+                utcDate = utcDate.split(" ");
+                utcDate = utcDate.slice(0, 4);
+                utcDate = utcDate.join(" ");
                 // document.getElementById('istdate').innerHTML = localMoment.format('MMMM Do YYYY');
                 // document.getElementById('istday').innerHTML = localMoment.format("dddd");
                 document.getElementById('twd').innerHTML = utcMoment.format('HH:mm:ss.ms');
-                document.getElementById('dd').innerHTML = localMoment.format("dddd")+", "+localMoment.format('MMMM Do YYYY') ;
+                document.getElementById('dd').innerHTML = utcDate;//utcDate.format("dddd")+", "+utcDate.format('MMMM Do YYYY') ;
                 //One to show conversion
                 // document.getElementById('utcdate').innerHTML = utcMoment.format('MMMM Do YYYY');
                 // document.getElementById('utcday').innerHTML = utcMoment.format("dddd");
