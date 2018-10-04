@@ -1,15 +1,32 @@
 const express = require('express')
-const app = express()
-const db = require('./lib/data-access/pgp').db,
-  KeyValueRouteHandler = require('./lib/route-handler/key-value-route-handler');
+const app = express();
+var cors = require('cors')
+var path = require('path');
+const TinyUrlRouteHandler = require('./lib/route-handler/tiny-url-route-handler');
+const ComparisonRouteHandler = require('./lib/route-handler/comparison-route-handler');
 
 function start() {
   let dependencies = {};
-  dependencies.pgpPriceEngine = db("postgres://postgres:postgres@localhost/ecompricingengine", 10, 1);
-  let keyValueRouteHandler = new KeyValueRouteHandler(dependencies)
+  let tinyUrlRouteHandler = new TinyUrlRouteHandler(dependencies)
+  let comparisonRouteHandler = new ComparisonRouteHandler(dependencies)
   app.use(express.json())
-  app.post('/info', (req, res) => {return keyValueRouteHandler.save(req, res)})
-  app.post('/get-info', (req, res) => {return keyValueRouteHandler.getInfo(req, res)})
-  app.listen(3000, () => console.log('Example app listening on port 3000!'))
+  app.use(cors())
+  app.options('*', cors()) 
+  app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, application/json, *")
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+  });
+  app.get('/get-tiny-url', (req, res) => {
+    return tinyUrlRouteHandler.getTinyUrl(req, res)
+  })
+  app.post('/array-companison', (req, res) => {
+    return comparisonRouteHandler.arrayComparison(req, res)
+  })
+  app.use(express.static(path.join(__dirname, 'web')));
+  var port = process.env.PORT || 1337;
+  app.listen(port);
 }
 start();

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Array Comparison</title>
+    <link rel="stylesheet" href="./css/array-compare.css">
+</head>
+
+<body>
+    <div>
+        <h3><a href = "index.html" style="font-size: 20px">HOME</a></h3>
+        <div id="checkboxdiv">
+            <input type="checkbox" name="types" value="spaces" id="spaces"> <label>spaces</label>
+            <input type="checkbox" name="types" value="case" id="case"> <label>Case-insensitive</label>
+            <input type="checkbox" name="types" value="duplicates" id="duplicates"> <label>Remove duplicates</label>
+        </div>
+        <div class="splithigh left">
+            <p>Array1: </p>
+            <textarea id="array1"></textarea>
+        </div>
+        <div class="splithigh centered">
+            <p>Array1 Only: </p>
+            <textarea id="array1only"></textarea>
+        </div>
+        <div class="splithigh right">
+            <p>Array1 or Array2: </p>
+            <textarea id="array1or2"></textarea>
+        </div>
+        </br>
+        <div class="splitlow left">
+            <p>Array2: </p>
+            <textarea id="array2"></textarea>
+        </div>
+        <div class="splitlow centered">
+            <p>Array2 Only: </p>
+            <textarea id="array2only"></textarea>
+        </div>
+        <div class="splitlow right">
+            <p>Array1 and Array2: </p>
+            <textarea id="array1and2"></textarea>
+        </div></br>
+        <button id="compare" onclick="compare()">COMPARE</button>
+    </div>
+    <script src="./js/compare.js"></script>
+</body>
+
+</html>
