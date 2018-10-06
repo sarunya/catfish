@@ -1,98 +1,96 @@
-#checkboxdiv {
-    height: 50%;
-    position: fixed;
-    /* z-index: 1; */
-    top: 5%;
-    overflow-x: hidden;
-    padding-top: 10px;
-    left: 8%;
-    padding-right: 20px;
+body,
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
 
-#checkboxdiv label {
-    font-size: 10pt;
-    padding-right: 20px;
+.container {
+    width: 100%;
+    height: 100%;
 }
 
-.splithigh {
-    height: 50%;
+.leftpane {
     width: 30%;
-    position: fixed;
-    /* z-index: 1; */
-    top: 10%;
-    overflow-x: hidden;
-    padding-top: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
+    height: 30%;
+    float: left;
+    position: absolute;
+    border-collapse: separate;
 }
 
-.splitlow {
-    height: 50%;
+.middlepane {
     width: 30%;
-    position: fixed;
-    /* z-index: 1; */
-    top: 50%;
-    overflow-x: hidden;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    height: 30%;
+    position: absolute;
+    float: left;
+    margin-left: 32%;
+    border-collapse: separate;
 }
 
-/* Control the left side */
-
-.left {
-    left: 5%;
-    /* background-color : cadetblue; */
+.rightpane {
+    width: 30%;
+    height: 30%;
+    margin-left: 64%;
+    position: absolute;
+    float: right;
+    border-collapse: separate;
 }
 
-/* Control the right side */
-
-.right {
-    right: 5%;
-    /* background-color: red; */
+.top {
+    width: 100%;
+    margin-left: 2%;
 }
 
-/* If you want the content centered horizontally and vertically */
-
-.centered {
-    /* position: absolute; */
-    left: 35%;
-    /* transform: translate(-50%, -50%); */
-    /* text-align: center; */
-}
-
-/* Style the image inside the centered container, if needed */
-
-body {
-    background-color: azure;
+.bottom {
+    width: 100%;
+    margin-left: 2%;
+    margin-top: 18%;
 }
 
 textarea {
-    /* position: absolute; */
-    width: 95%;
-    height: 60%;
-    border-width: 2px;
-    border-color: cadetblue;
-    text-align: left;
-    font-size: small;
+    border-color: #41c7f8;
+    border-width: 3px;
+    border-bottom-style: solid;
+    box-shadow: 2px;
+    width: 100%;
+    height: 90%;
+}
+
+p{
+    font-size: 12px;
+    color: rgb(78, 77, 77);
+    font-style: inherit;
+    margin-right: 3%;
+}
+
+label{
+    font-size: 14px;
+    word-spacing: 0.5em;
+    color: rgb(78, 77, 77);
+    font-style: inherit;
+    margin-right: 3%;
+    font-weight: normal;
 }
 
 button {
-    top: 88%;
-    left: 45%;
-    position: fixed;
-    background-color: cadetblue; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
+    font-size: 1.2em;
+    color: #fff;
+    background-color: #ff3c41;
+    padding-left: .5em;
+    padding-right: .5em;
+    position: absolute;
+    margin:auto;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    margin: 5px 2px;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    width: 10%;
+    height: 40px;
+    margin-left: 45%;
+    margin-top: 19%
 }
 
-p {
-    font-size: 10pt;
+#checkboxdiv {
+    margin-left: 2%;
+}
+
+#checkboxdiv input {
+    margin-right: 0.5%;
 }

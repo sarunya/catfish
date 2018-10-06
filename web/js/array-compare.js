@@ -1,17 +1,6 @@
-
-$('#compare').on('click', () => {
-    let array1 = $('#array1').val()
-    let array2 = $('#array2').val()
- 
-     compare(array1, array2);
- })
-
- function comparethis() {
-     console.log("compare this");
+function comparethis() {
      let array1 = $('#array1').val()
-     console.log("compare this", array1, typeof array1);
     let array2 = $('#array2').val()
-    console.log("compare this", array2, typeof array2);
  
      compare(array1, array2);
  }
@@ -33,8 +22,18 @@ function compare(array1, array2) {
     array2 = array2.split("\n");
 
     if (isRemoveSpaces()) {
-        removeSpacesFromArray(array1);
-        removeSpacesFromArray(array2);
+        array1 = removeSpacesFromArray(array1);
+        array2 = removeSpacesFromArray(array2);
+    }
+
+    if(isIgnoreCase()) {
+        array1 = convertAllToLowerCase(array1);
+        array2 = convertAllToLowerCase(array2);
+    }
+
+    if (isRemoveDuplicates()) {
+        array1 = removeDuplicates(array1);
+        array2 = removeDuplicates(array2);
     }
 
     let ignoreCase = isIgnoreCase();
@@ -57,6 +56,10 @@ function compare(array1, array2) {
 
 function setArrayAndLength(id, array) {
 
+    if(isRemoveDuplicates(array)) {
+        array = removeDuplicates(array);
+    }
+
     $(id).val(array.join("\n"));
 
     let element = $(id).siblings("p");
@@ -76,6 +79,23 @@ function removeSpacesFromArray(array) {
         }
     }
     return array;
+}
+
+function convertAllToLowerCase(array) {
+    for(let index=0; index < array.length; index++) {
+        array[index] = array[index].toLowerCase();
+    }
+    return array;
+}
+
+function removeDuplicates(array) {
+    let unique = [];
+    for(let index=0; index < array.length; index++) {
+        if(unique.indexOf(array[index])<0) {
+            unique.push(array[index]);
+        }
+    }
+    return unique;
 }
 
 function differencearr(a1, a2, isIgnoreCase) {
