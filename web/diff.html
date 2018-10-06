@@ -1,65 +1,413 @@
-<style>
+<!--
+	Author: W3layouts
+	Author URL: http://w3layouts.com
+	License: Creative Commons Attribution 3.0 Unported
+	License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>CatFish</title>
+
+	<!--/tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Collabration editing portal" />
+	<script type="application/x-javascript">
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+    </script>
+    
+    <script src="js/json-compare.js" type="text/javascript" charset="utf-8"></script>
+	<!--//tags -->
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/prettyPhoto.css" rel="stylesheet" type="text/css" />
+	<link href="css/font-awesome.css" rel="stylesheet">
+	<!-- //for bootstrap working -->
+    <style>
         /* Split the screen in half */
-        .split {
-        height: 100%;
+        #main .divideit {
+        height: 90%;
         width: 50%;
         position: fixed;
         z-index: 1;
         top: 0;
-        overflow-x: hidden;
+        overflow-x: scroll;
+        
         padding-top: 20px;
         }
-
+    
         /* Control the left side */
-        .left {
+        #main .leftside {
         left: 0;
         background-color: bisque;
-        overflow: scroll;
         }
-
+    
         /* Control the right side */
-        .right {
+        #main .rightside {
         right: 0;
         background-color: white;
-        overflow: scroll;
         }
-
+    
+        body{
+            overflow: scroll;
+        }
+    
+        #main {
+            margin: 25px auto;
+            width: 95%;
+        }
+    
         /* If you want the content centered horizontally and vertically */
-        .centered {
-        position: absolute;
-        top: 5%;
-        left: 10%;
-        text-align: left;
+        #main .centerpos {
+            position: relative;
+            margin: 0 auto;
+            display: block;
+            align: center;
         }
-        pre{
+        
+        #main pre.codeblock.left {
+            width: 48%;
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 1em;
+        }
+    
+        #main pre.codeblock.right {
+            width: 48%;
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 2em;
+        }
+    
+        #main pre.codeBlock, div.codeBlock {
+            background-color: #eee;
+            overflow: auto;
+            margin: 0 0 1em;
+            padding: .5em 1em;
+        }
+        #main div.left {
+            width: 45%;
+            display: inline-block;
+        }
+    
+        #main div.center {
+            width: 14%;
+            display: inline-block;
+            vertical-align: top;
+            text-align: left;
+            margin-top: 2%;
+            margin-left: 40%;
+        }
+
+		#main div.top {
+            width: 14%;
+            display: inline-block;
+            vertical-align: top;
+            text-align: left;
+            margin-top: 0%;
+            margin-left: 40%;
+        }
+    
+        #main div.right {
+            width: 45%;
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 5%;
+        }
+    
+        #main div, #main pre {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font: normal;
+            vertical-align: baseline;
+        }
+    
+        #main input, #main textarea, #main select, #main button {
+            text-rendering: auto;
+            color: initial;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            margin: 0em;
+            font: 400 11px system-ui;
+        }
+    
+        #main textarea {
+            width: 100%;
+            min-height: 500px;
+            padding: 5px;
+            background: #eee;
+            border-radius: 4px;
+            resize: vertical;
+            white-space: pre;
+            word-wrap: normal;
+        }
+    
+        #main button {
+            font-size: 1.2em;
+            color: #333;
+            padding-left: .5em;
+            padding-right: .5em;
+            position: absolute;
+            margin:auto;
+            text-align: center;
+            width: 14%;
+        }
+    
+        #main pre{
             counter-reset: line;
+			font-size: 11px;
+    			line-height: 1.5;
             }
-            code{
+			#main code{
                 counter-increment: line;
+				white-space: nowrap;
+				font-size: 11px;
+    			line-height: 1.5;
+				
             }
-            code:before{
-                content: counter(line);
-                display: inline-block;
-                width: 1.0em; /* Fixed width */
-                border-right: 2px solid #ddd;
-                padding: 0 .5em;
-                margin-right: .5em;
-                color: #888;
-                -webkit-user-select: none;
-            }
+            #main code:before{
+				content: counter(line);
+				display: inline-block;
+				width: 3.0em;
+				border-right: 1.2px solid #ddd;
+				border-color: #484B49;
+				padding: 0.5 .5em;
+				margin-right: .5em;
+				color: #484B49;
+				-webkit-user-select: none;
+			}
+    
+    </style>
+</head>
 
-        </style>
-        <div class="split left">
-            <div class="centered">
-                
-                <h2>Jane Flex</h2>
-                <pre><code style="background-color: none" >{</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;a : 1,</code></br><code></code></br><code></code></br><code></code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;b : 2,</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;K : "sarunya",</code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;json1 : {</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key : 1,</code><br/><code></code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key5 : {</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g : "a",</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f : "b"</code></br><code></code></br><code></code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;}</code>,</code><br/><code style="background-color: green" >&nbsp;&nbsp;&nbsp;&nbsp;baby : "sdfd"</code><br/><code style="background-color: none" >}</code></br></pre>
-            </div>
+<body>
+	<div class="top_header" id="home">
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="nav_top_fx_w3ls_agileinfo">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					    aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+					<div class="logo-w3layouts-agileits">
+						<h1> <a class="navbar-brand" href="index.html"><i class="fa fa-clone" aria-hidden="true"></i> CatFish <span class="desc">For your Development</span></a></h1>
+					</div>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<div class="nav_right_top">
+						
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="index.html">Home</a></li>
+						</ul>
+					</div>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+    </div>
+    <div class="banner_inner_con">
+    </div>
+    <div class="services-breadcrumb">
+        <div class="inner_breadcrumb">
+			<ul class="short">
+                    <li><a href="index.html">Home</a><span>|</span></li>
+                    <li><a href="codeshare.html">Interview Zone</a><span>|</span></li>
+                    <li>UTC Time</li>
+                </ul>
+        </div>
+    </div>
+	<!-- banner -->
+	<div id="main">
+        <div class="initContainer">
+            <div class="left">
+                <textarea spellcheck="false" id="textarealeft" placeholder="Enter JSON to compare, enter an URL to JSON"></textarea>
+                <pre id="errorLeft" class="error"></pre>
             </div>
 
-            <div class="split right">
-            <div class="centered">
-                <h2>John Doe</h2>
-                <pre><code style="background-color: none" >{</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;a : {<br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"c": 1,</code><br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"d": 1</code><br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;}</code>,</code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;b : 2,</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;K : 2345,</code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;json1 : {</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key : 1,</code><br/><code style="background-color: green" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key2 : 2,</code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key5 : {</br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g : "a",</code><br/><code style="background-color: red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f : {<br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"k": 12345</code><br/><code background-color="red" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></code></br><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></code><br/><code style="background-color: none" >&nbsp;&nbsp;&nbsp;&nbsp;}</code>,</code><br/><code></code></br><code style="background-color: none" >}</code></br></pre>
+            <!--  -->
+
+            <div class="right">
+                <textarea spellcheck="false" class="right" id="textarearight" placeholder="Enter JSON to compare, enter an URL to JSON"></textarea>
+                <pre id="errorRight" class="error"></pre>
+            </div>
+            <br>
+            <div class="center">
+                <button id="compare" onclick="compareAndPopualateResult()">Compare</button>
+                <div class="throbber-loader"></div>
             </div>
         </div>
+		<div class="centerpos" style="display: none;">
+			<div class="top">
+                <button id="New_Diff" onclick="newDiff()">New Diff</button>
+                <div class="throbber-loader"></div>
+            </div><br><br>
+            <pre class="codeblock left" id="left">${diff[0]}</pre>
+            <pre class="codeblock right" id="right">${diff[1]}</pre>
+        </div>
+    </div>
+	<!--//banner -->
+	<!--/ab-->
+	<div class="banner_bottom">
+	</div>
+	<!--//ab-->
+	<!--/what-->
+	
+	</div>
+	<!--//what-->
+	<!--/banner_bottom-->
+	<!--//banner_bottom-->
+	<!--/projects-->
+	
+	<!--//projects-->
+	<!--/blog-->
+	
+	<!--//blog-->
+	<!--/bottom-->
+	<!-- footer -->
+	<div class="footer">
+		<div class="footer_inner_info_w3ls_agileits">
+			<div class="col-md-3 footer-left">
+				<h2><a href="index.html"><i class="fa fa-clone" aria-hidden="true"></i> Catfish </a></h2>
+				<p>Choose the service that you need for your official purpose. Have all you need in one place</p>
+				<ul class="social-nav model-3d-0 footer-social social two">
+					<li>
+						<a href="#" class="facebook">
+							<div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+							<div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="twitter">
+							<div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+							<div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="instagram">
+							<div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+							<div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="pinterest">
+							<div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+							<div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-9 footer-right">
+				<div class="sign-grds">
+					<div class="col-md-4 sign-gd">
+						<h4>Latest <span>Info</span> </h4>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="codeshare.html">Services</a></li>
+							<!-- <li><a href="404.html">Services</a></li>
+							<li><a href="signin.html">Signin</a></li>
+							<li><a href="contact.html">Contact</a></li> -->
+						</ul>
+					</div>
+					<div class="col-md-3 sign-gd flickr-post">
+						
+					</div>
+					<div class="col-md-5 sign-gd-two">
+						<h4>Contact <span>Information</span></h4>
+						<div class="address">
+							<!-- <div class="address-grid">
+								<div class="address-left">
+									<i class="fa fa-phone" aria-hidden="true"></i>
+								</div>
+								<div class="address-right">
+									<h6>Phone Number</h6>
+									<p>+1 234 567 8901</p>
+								</div>
+								<div class="clearfix"> </div>
+							</div> -->
+							<div class="address-grid">
+								<div class="address-left">
+									<i class="fa fa-envelope" aria-hidden="true"></i>
+								</div>
+								<div class="address-right">
+									<h6>Email Address</h6>
+									<p>Email :<a href="mailto:catfish@mailinator.com"> catfish@mailinator.com</a></p>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="address-grid">
+								<div class="address-left">
+									<i class="fa fa-map-marker" aria-hidden="true"></i>
+								</div>
+								<div class="address-right">
+									<h6>Location</h6>
+									<p>Shastri Nagar, Adyar, Chennai, India.
+
+									</p>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<p class="copy-right">&copy 2018. All rights reserved </p>
+		</div>
+	</div>
+	</div>
+	<!-- //footer -->
+	<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script>
+		$('ul.dropdown-menu li').hover(function () {
+			$(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+		}, function () {
+			$(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+		});
+	</script>
+
+	<!-- js -->
+	<!-- Smooth-Scrolling-JavaScript -->
+	<script type="text/javascript" src="js/easing.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			$(".scroll, .navbar li a, .footer li a").click(function (event) {
+				$('html,body').animate({
+					scrollTop: $(this.hash).offset().top
+				}, 1000);
+			});
+		});
+	</script>
+	<!-- //Smooth-Scrolling-JavaScript -->
+	<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	<!-- jQuery-Photo-filter-lightbox-Gallery-plugin -->
+	<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+	<script src="js/jquery.quicksand.js" type="text/javascript"></script>
+	<script src="js/script.js" type="text/javascript"></script>
+	<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
+	<!-- //jQuery-Photo-filter-lightbox-Gallery-plugin -->
+
+</body>
+
+</html>
