@@ -143,14 +143,14 @@ function compareTwoJsonObject(actual, expected, indentation) {
                     let prettyVal = _prettyJson(eVal, indentation + 4, ecolor);
                     acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey} : ${_prettyJson(aVal, indentation, acolor)[0]}${acomma}</code><br/></div>`;
                     acutalJsonString += lineBreak.repeat(prettyVal[1] - 1);
-                    expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}${ecomma}</code><br/></div>`;
+                    expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}${ecomma}</code></div>`;
                 } else if (eVal.length == 0) {
                     ecolor = wrongColor;
                     acolor = wrongColor;
                     let prettyVal = _prettyJson(aVal, indentation + 4, acolor);
                     expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${_prettyJson(eVal, indentation, ecolor)[0]}${ecomma}</code><br/></div>`;
                     expectedJsonString += lineBreak.repeat(prettyVal[1] - 1);
-                    acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}${acomma}</code><br/></div>`;
+                    acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}${acomma}</code></div>`;
                 } else if (typeof aVal[0] == typeof eVal[0]) {
                     expectedJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation)}${eKey} : [</code><br/></div>`;
                     acutalJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation)}${eKey} : [</code><br/></div>`;
@@ -185,7 +185,7 @@ function compareTwoJsonObject(actual, expected, indentation) {
                             if (j == eVal.length - 1) {
                                 ecomma = "";
                             }
-                            let diff = _prettyJson(eVal[j], indentation + 4, extraColor, ecomma);
+                            let diff = _prettyJson(eVal[j], indentation + 8, extraColor, ecomma);
                             expectedJsonString += `<div  style="background-color: ${extraColor}"><code>${space.repeat(indentation+4)}${diff[0]}</code></div>`; //${ecomma}</code><br/></div>
                             acutalJsonString += lineBreak.repeat(diff[1]);
                             ++j;
