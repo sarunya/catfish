@@ -248,8 +248,8 @@ function compareTwoJsonObject(actual, expected, indentation) {
         } else {
             acolor = wrongColor;
             ecolor = wrongColor;
-            let actualErr = _prettyJson(aVal, indentation + 4, acolor);
-            let expectedErr = _prettyJson(eVal, indentation + 4, ecolor);
+            let actualErr = _prettyJson(aVal, indentation + 4, acolor, acomma);
+            let expectedErr = _prettyJson(eVal, indentation + 4, ecolor, ecomma);
             let acbr = 0,
                 expbr = 0;
             if (actualErr[1] < expectedErr[1]) {
@@ -257,8 +257,8 @@ function compareTwoJsonObject(actual, expected, indentation) {
             } else if (expectedErr[1] < actualErr[1]) {
                 expbr = actualErr[1] - expectedErr[1];
             }
-            acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey} : ${actualErr[0]}${acomma}</code></br></div>${lineBreak.repeat(acbr)}`;
-            expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${expectedErr[0]}${ecomma}</code></br></div>${lineBreak.repeat(expbr)}`;
+            acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey} : ${actualErr[0]}</code></div>${lineBreak.repeat(acbr)}`;
+            expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${expectedErr[0]}</code></div>${lineBreak.repeat(expbr)}`;
         }
     }
 
