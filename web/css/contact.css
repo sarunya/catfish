@@ -110,13 +110,13 @@ span.input.input--chisato:nth-child(2) {
 	position: absolute;
 	top: -200%;
 	left: 0;
-	color: #76daff;
+	color: #41c7f8;
 	font-weight: 600;
 }
 
 .input__field--chisato:focus,
 .input--filled .input__field--chisato {
-	border-color: #76daff;
+	border-color: #41c7f8;
 }
 
 .input__field--chisato:focus+.input__label--chisato,
@@ -218,7 +218,7 @@ span.input.input--chisato:nth-child(2) {
 
 .mail_form input[type="submit"] {
 	outline: none;
-    background: #76daff;
+    background: #41c7f8;
 	color: #fff;
 	padding: 1em 0;
 	font-size: 1em;

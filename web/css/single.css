@@ -91,7 +91,7 @@ h6.media-heading {
 .comment-bottom input[type="submit"] {
     width: 30%;
     font-size: 1.1em;
-    background: #76daff;
+    background: #41c7f8;
     padding: 0.7em 1em;
     text-align: center;
     color: #fff;
@@ -142,7 +142,7 @@ h6.media-heading {
     letter-spacing: 3px;
 }
 .blo-top form input[type="submit"] {
-    background: #76daff;
+    background: #41c7f8;
     padding: .7em 1em;
     color: #fff;
     font-size: 15px;
