@@ -100,12 +100,12 @@
         }
     
         #main div.center {
-            width: 14%;
+            width: 8%;
             display: inline-block;
             vertical-align: top;
             text-align: left;
-            margin-top: 2%;
-            margin-left: 40%;
+            margin-top: 1%;
+            margin-left: 42%;
         }
 
 		#main div.top {
@@ -150,7 +150,8 @@
             width: 100%;
             min-height: 500px;
             padding: 5px;
-            background: #eee;
+			background: #eee;
+			border-color: #0a0101;
             border-radius: 4px;
             resize: vertical;
             white-space: pre;
@@ -159,13 +160,15 @@
     
         #main button {
             font-size: 1.2em;
-            color: #333;
+			color: #fff;
+			background-color: #ff3c41;
             padding-left: .5em;
             padding-right: .5em;
             position: absolute;
             margin:auto;
             text-align: center;
-            width: 14%;
+			width: 10%;
+			height: 5%;
         }
     
         #main pre{
@@ -191,6 +194,31 @@
 				color: #484B49;
 				-webkit-user-select: none;
 			}
+
+
+
+		#main .centerpos.center {
+            width: 8%;
+            display: inline-block;
+            vertical-align: top;
+            text-align: left;
+            margin-top: 1%;
+            margin-left: 50%;
+		}
+
+		button#New_Diff {
+            font-size: 1.2em;
+			color: #fff;
+			background-color: #ff3c41;
+            padding-left: .5em;
+            padding-right: .5em;
+            position: absolute;
+            margin:auto;
+            text-align: center;
+			width: 150px;
+			height: 40px;
+			margin-left: 5%
+        }
     
     </style>
 </head>
@@ -223,15 +251,16 @@
 				<!--/.nav-collapse -->
 			</div>
 		</nav>
-    </div>
-    <div class="banner_inner_con">
-    </div>
+    </div><br><br><br><br>
+    <!-- <div class="banner_inner_con">
+    </div> -->
     <div class="services-breadcrumb">
         <div class="inner_breadcrumb">
 			<ul class="short">
                     <li><a href="index.html">Home</a><span>|</span></li>
                     <li><a href="codeshare.html">Interview Zone</a><span>|</span></li>
-                    <li>UTC Time</li>
+                    <li><a href="utc.html">UTC Time</a><span>|</span></li>
+                    <li>Compare Json</li>
                 </ul>
         </div>
     </div>
@@ -239,29 +268,34 @@
 	<div id="main">
         <div class="initContainer">
             <div class="left">
-                <textarea spellcheck="false" id="textarealeft" placeholder="Enter JSON to compare, enter an URL to JSON"></textarea>
+                <textarea spellcheck="false" id="textarealeft" placeholder="Enter JSON to compare"></textarea>
                 <pre id="errorLeft" class="error"></pre>
             </div>
 
             <!--  -->
 
             <div class="right">
-                <textarea spellcheck="false" class="right" id="textarearight" placeholder="Enter JSON to compare, enter an URL to JSON"></textarea>
+                <textarea spellcheck="false" class="right" id="textarearight" placeholder="Enter JSON to compare"></textarea>
                 <pre id="errorRight" class="error"></pre>
             </div>
             <br>
             <div class="center">
-                <button id="compare" onclick="compareAndPopualateResult()">Compare</button>
+                <button id="compare" onclick="compareAndPopualateResult()">COMPARE</button>
                 <div class="throbber-loader"></div>
             </div>
         </div>
 		<div class="centerpos" style="display: none;">
 			<div class="top">
-                <button id="New_Diff" onclick="newDiff()">New Diff</button>
+                <button id="New_Diff" onclick="newDiff()">NEW DIFF</button>
                 <div class="throbber-loader"></div>
-            </div><br><br>
+            </div><br><br><br>
             <pre class="codeblock left" id="left">${diff[0]}</pre>
             <pre class="codeblock right" id="right">${diff[1]}</pre>
+            <br>
+            <!-- <div class="centerpos center">
+                <button id="New_Diff" onclick="newDiff()">NEW DIFF</button>
+                <div class="throbber-loader"></div>
+            </div> -->
         </div>
     </div>
 	<!--//banner -->
