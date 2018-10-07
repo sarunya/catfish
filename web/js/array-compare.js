@@ -1,5 +1,5 @@
 function comparethis() {
-     let array1 = $('#array1').val()
+    let array1 = $('#array1').val()
     let array2 = $('#array2').val()
  
      compare(array1, array2);

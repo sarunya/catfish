@@ -32,8 +32,9 @@
     <link href="css/font-awesome.css" rel="stylesheet">
     <!-- //for bootstrap working -->
 
-    <link rel="stylesheet" href="./css/array-comparison.css">
-    <script type="text/javascript" src="./js/array-compare.js"></script>
+    <link rel="stylesheet" href="./css/base64-encrypt.css">
+    <script type="text/javascript" src="./js/encoding.js"></script>
+    
 </head>
 
 <body>
@@ -75,42 +76,26 @@
                 <li><a href="codeshare.html">Interview Zone</a><span>|</span></li>
                 <li><a href="utc.html">UTC Time</a><span>|</span></li>
                 <li><a href="json-comparison.html">Compare Json</a><span>|</span></li>
-                <li>Compare Array</a><span>|</span></li>
+                <li><a href="array-comparison.html">Compare Array</a><span>|</span></li>
                 <li><a href="base64-encrypt.html">Base64</a></li>
             </ul>
         </div>
     </div><br>
     <!-- banner -->
     <div class="container">
-        <div id="checkboxdiv">
-            <input type="checkbox" name="types" value="spaces"> <label>spaces</label>
-            <input type="checkbox" name="types" value="case"> <label>Case-insensitive</label>
-            <input type="checkbox" name="types" value="duplicates"> <label>Remove duplicates</label>
-        </div>
         <div class="top">
             <div class="leftpane">
-                <p>Array1: </p><textarea id="array1"></textarea>
-            </div>
-            <div class="middlepane">
-                <p>Array1 Only: </p><textarea id="array1only"></textarea>
-            </div>
-            <div class="rightpane">
-                <p>Array1 Or Array2: </p><textarea id="array1or2"></textarea>
-            </div>
-        </div>
-        <div class="bottom">
-            <div class="leftpane">
-                <p>Array2: </p><textarea id="array2"></textarea>
-            </div>
-            <div class="middlepane">
-                <p>Array2 Only: </p><textarea id="array2only"></textarea>
-            </div>
-            <div class="rightpane">
-                <p>Array1 And Array2: </p><textarea id="array1and2"></textarea>
+                <p>Text Before: </p><textarea id="text1"></textarea>
             </div>
         </div>
         <div class="center">
-            <button id="compare" onclick="comparethis()">COMPARE</button>
+            <button id="encode" onclick="base64Encode()">ENCODE</button>
+            <button id="decode" onclick="base64Decode()">DECODE</button>
+        </div>
+        <div class="bottom">
+            <div class="leftpane">
+                <p>Text After: </p><textarea id="text2"></textarea>
+            </div>
         </div>
     </div>
 

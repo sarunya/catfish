@@ -1,0 +1,91 @@
+body,
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.leftpane {
+    width: 60%;
+    height: 30%;
+    float: left;
+    position: absolute;
+    border-collapse: separate;
+}
+
+.top {
+    width: 100%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.center {
+    width: 100%;
+    margin-left: 20%;
+    margin-top: 10%;
+    margin-right: 20%;
+}
+
+.bottom {
+    width: 100%;
+    margin-left: 20%;
+    margin-top: 22%;
+    margin-right: 20%;
+}
+
+textarea {
+    border-color: #41c7f8;
+    border-width: 3px;
+    border-bottom-style: solid;
+    box-shadow: 2px;
+    width: 100%;
+    height: 90%;
+}
+
+textarea{
+    font-size: 15px;
+    color: rgb(78, 77, 77);
+    font-style: inherit;
+    margin-right: 3%;
+}
+
+p{
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    box-shadow: 2px;
+    text-shadow: 4px;
+    font-weight: bold;
+    margin-right: 3%;
+}
+
+button {
+    font-size: 1.2em;
+    color: #fff;
+    background-color: #ff3c41;
+    padding-left: .5em;
+    padding-right: .5em;
+    position: absolute;
+    margin:auto;
+    text-align: center;
+    width: 10%;
+    height: 40px;
+    margin-left: 15%;
+    margin-top: 9%
+}
+
+button#decode {
+    margin-left: 30%;
+}
+
+#checkboxdiv {
+    margin-left: 2%;
+}
+
+#checkboxdiv input {
+    margin-right: 0.5%;
+}
