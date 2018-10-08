@@ -316,14 +316,19 @@ span.desc {
 
 /* Show it is fixed to the top */
 
-.top-buttons {
-    margin: 2em auto 0;
+.top-buttons1 {
     text-align: center;
-    width: 12% ;
+    width: 80% ;
+    margin-right: 10%;
+    margin-left: 10%;
 }
 
 .bnr-button {
     float: left;
+    margin-right: 3%;
+    margin-left: 3%;
+    width: 14%;
+    height: 4%;
 }
 
 .bnr-button a {
@@ -335,7 +340,8 @@ span.desc {
     text-transform: uppercase;
     color: #fff;
     font-size: 0.75em;
-    display: inline-block;
+    display: block;
+    height: 4%;
 }
 
 a.act {
@@ -2067,5 +2073,15 @@ p.copy-right a:hover {
     .banner_inner_con {
         min-height: 165px;
     }
+}
+
+.modal-header, h4, .close {
+    background-color: #f83636;
+    color:white !important;
+    text-align: center;
+    font-size: 30px;
+}
+.modal-footer {
+    background-color: #e97f7f;
 }
 /*--//responsive--*/
