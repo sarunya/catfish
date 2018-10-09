@@ -132,103 +132,9 @@ function compareTwoJsonObject(actual, expected, indentation) {
                 acutalJsonString += `<code style="background-color: ${resetColor}" >${space.repeat(indentation)}${eKey} : ${diff[0]}${acomma}</code><br/>`;
                 expectedJsonString += `<code style="background-color: ${resetColor}" >${space.repeat(indentation)}${eKey} : ${diff[1]}${ecomma}</code><br/>`;
             } else if (_isArray(aVal)) {
-                if (aVal.length == 0 && eVal.length == 0) {
-                    acolor = resetColor;
-                    ecolor = resetColor;
-                    acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey} : ${_prettyJson(aVal, indentation, acolor)[0]}${acomma}</code><br/></div>`;
-                    expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${_prettyJson(eVal, indentation, ecolor)[0]}${ecomma}</code><br/></div>`;
-                } else if (aVal.length == 0) {
-                    ecolor = wrongColor;
-                    acolor = wrongColor;
-                    let prettyVal = _prettyJson(eVal, indentation + 4, ecolor);
-                    acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey} : ${_prettyJson(aVal, indentation, acolor)[0]}${acomma}</code><br/></div>`;
-                    acutalJsonString += lineBreak.repeat(prettyVal[1] - 1);
-                    expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}${ecomma}</code></div>`;
-                } else if (eVal.length == 0) {
-                    ecolor = wrongColor;
-                    acolor = wrongColor;
-                    let prettyVal = _prettyJson(aVal, indentation + 4, acolor);
-                    expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${_prettyJson(eVal, indentation, ecolor)[0]}${ecomma}</code><br/></div>`;
-                    expectedJsonString += lineBreak.repeat(prettyVal[1] - 1);
-                    acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}${acomma}</code></div>`;
-                } else if (typeof aVal[0] == typeof eVal[0]) {
-                    expectedJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation)}${eKey} : [</code><br/></div>`;
-                    acutalJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation)}${eKey} : [</code><br/></div>`;
-                    if (_isJSON(aVal[0])) {
-                        let i = 0,
-                            j = 0;
-                        while (i < aVal.length && j < eVal.length) {
-                            let diff = compareTwoJsonObject(aVal[i], eVal[j], indentation + 8);
-                            acomma = ",";
-                            ecomma = ",";
-                            if (i == aVal.length - 1) {
-                                acomma = "";
-                            }
-                            if (j == eVal.length - 1) {
-                                ecomma = "";
-                            }
-                            acutalJsonString += `<div  style="background-color: ${resetColor}"><code style="background-color: ${resetColor}" >${space.repeat(indentation+4)}${diff[0]}${acomma}</code><br/></div>`;
-                            expectedJsonString += `<div  style="background-color: ${resetColor}"><code style="background-color: ${resetColor}" >${space.repeat(indentation+4)}${diff[1]}${ecomma}</code><br/></div>`;
-                            ++i;
-                            ++j;
-                        }
-                        while (i < aVal.length) {
-                            if (i == aVal.length - 1) {
-                                acomma = "";
-                            }
-                            let diff = _prettyJson(aVal[i], indentation + 8, extraColor, acomma);
-                            acutalJsonString += `<div  style="background-color: ${extraColor}"><code>${space.repeat(indentation+4)}${diff[0]}</code></div>`; //${acomma}</code><br/></div>
-                            expectedJsonString += lineBreak.repeat(diff[1]);
-                            ++i;
-                        }
-                        while (j < eVal.length) {
-                            if (j == eVal.length - 1) {
-                                ecomma = "";
-                            }
-                            let diff = _prettyJson(eVal[j], indentation + 8, extraColor, ecomma);
-                            expectedJsonString += `<div  style="background-color: ${extraColor}"><code>${space.repeat(indentation+4)}${diff[0]}</code></div>`; //${ecomma}</code><br/></div>
-                            acutalJsonString += lineBreak.repeat(diff[1]);
-                            ++j;
-                        }
-                    } else {
-                        let common = _intersection(aVal, eVal);
-                        let aAlone = _difference(aVal, eVal);
-                        let eAlone = _difference(eVal, aVal);
-                        for (let j = 0; j < common.length; j++) {
-                            let commonVal = common[j];
-                            acutalJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation+4)}${_prettyJson(commonVal, indentation+4, resetColor)[0]}${acomma}</code><br/></div>`;
-                            expectedJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation+4)}${_prettyJson(commonVal, indentation+4, resetColor)[0]}${ecomma}</code><br/></div>`;
-                        }
-                        let diff = (aAlone.length > eAlone.length) ? (aAlone.length - eAlone.length) : eAlone.length - aAlone.length;
-                        let isaHigher = (aAlone.length > eAlone.length) ? true : false;
-                        for (let j = 0; j < aAlone.length; j++) {
-                            let aOnly = aAlone[j];
-                            acutalJsonString += `<div  style="background-color: ${extraColor}"><code>${space.repeat(indentation+4)}${_prettyJson(aOnly, indentation+4, wrongColor)[0]}${acomma}</code><br/></div>`;
-                        }
-                        for (let j = 0; j < eAlone.length; j++) {
-                            let eOnly = eAlone[j];
-                            expectedJsonString += `<div  style="background-color: ${extraColor}"><code>${space.repeat(indentation+4)}${_prettyJson(eOnly, indentation+4, wrongColor)[0]}${ecomma}</code><br/></div>`;
-                        }
-                        if (isaHigher) {
-                            while (diff) {
-                                expectedJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation+4)} ${ecomma}</code><br/></div>`;
-                                --diff;
-                            }
-                        } else {
-                            while (diff) {
-                                acutalJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation+4)} ${ecomma}</code><br/></div>`;
-                                --diff;
-                            }
-                        }
-                    }
-                    acolor = resetColor;
-                    ecolor = resetColor;
-                    acutalJsonString += `<code style="background-color: ${acolor}" >${space.repeat(indentation)}]${acomma}</code><br/>`;
-                    expectedJsonString += `<code style="background-color: ${ecolor}" >${space.repeat(indentation)}]${ecomma}</code><br/>`;
-                } else {
-
-                }
-
+                let diff = compareArray(aVal, eVal, eKey, indentation);
+                acutalJsonString+=diff[0];
+                expectedJsonString+=diff[1];
             } else {
                 if (aVal != eVal) {
                     acolor = wrongColor;
@@ -242,9 +148,9 @@ function compareTwoJsonObject(actual, expected, indentation) {
             }
         } else if (typeof actual[eKey] == "undefined") {
             ecolor = extraColor
-            let prettyVal = _prettyJson(eVal, indentation + 4, ecolor);
+            let prettyVal = _prettyJson(eVal, indentation + 4, ecolor, ecomma);
             acutalJsonString += lineBreak.repeat(prettyVal[1]);
-            expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}${ecomma}</code><br/></div>`;
+            expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}</code></div>`;
         } else {
             acolor = wrongColor;
             ecolor = wrongColor;
@@ -265,12 +171,12 @@ function compareTwoJsonObject(actual, expected, indentation) {
     for (let i = 0; i < missingKeysInActual.length; i++) {
         let aKey = missingKeysInActual[i];
         acolor = extraColor
-        let prettyVal = _prettyJson(actual[aKey], indentation + 4, acolor);
+        let prettyVal = _prettyJson(actual[aKey], indentation + 4, acolor, acomma);
         expectedJsonString += lineBreak.repeat(prettyVal[1]);
         if (missingKeysInActual.indexOf(aKey) == missingKeysInActual.length - 1) {
             acomma = "";
         }
-        acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${aKey} : ${prettyVal[0]}${acomma}</code><br/></div>`;
+        acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${aKey} : ${prettyVal[0]}</code></div>`;
     }
 
     acutalJsonString += `<code style="background-color: ${resetColor}" >${space.repeat(initindentation)}}</code>`;
@@ -283,13 +189,141 @@ function compareTwoJsonObject(actual, expected, indentation) {
     return [acutalJsonString, expectedJsonString];
 }
 
+function compareArray(aVal, eVal, eKey, indentation) {
+    let acolor = resetColor;
+    let ecolor = resetColor;
+    let acutalJsonString = "";
+    let expectedJsonString = "";
+    let acomma = "";
+    let ecomma = "";
+    if(eKey) {
+        eKey = space.repeat(indentation)+eKey+":"; 
+    } else {
+        eKey = "";
+    }
+    if (aVal.length == 0 && eVal.length == 0) {
+        acolor = resetColor;
+        ecolor = resetColor;
+        acutalJsonString += `<div  style="background-color: ${acolor}"><code>${eKey}${_prettyJson(aVal, indentation, acolor)[0]}${acomma}</code><br/></div>`;
+        expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${eKey}${_prettyJson(eVal, indentation, ecolor)[0]}${ecomma}</code><br/></div>`;
+    } else if (aVal.length == 0) {
+        ecolor = wrongColor;
+        acolor = wrongColor;
+        let prettyVal = _prettyJson(eVal, indentation + 4, ecolor, ecomma);
+        acutalJsonString += `<div  style="background-color: ${acolor}"><code>${eKey}${_prettyJson(aVal, indentation, acolor, acomma)[0]}</code></div>`;
+        acutalJsonString += lineBreak.repeat(prettyVal[1] - 1);
+        expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${eKey}${prettyVal[0]}</code></div>`;
+    } else if (eVal.length == 0) {
+        ecolor = wrongColor;
+        acolor = wrongColor;
+        let prettyVal = _prettyJson(aVal, indentation + 4, acolor, acomma);
+        expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${eKey}${_prettyJson(eVal, indentation, ecolor, ecomma)[0]}</code></div>`;
+        expectedJsonString += lineBreak.repeat(prettyVal[1] - 1);
+        acutalJsonString += `<div  style="background-color: ${acolor}"><code>${eKey}${prettyVal[0]}</code></div>`;
+    } 
+    else if (typeof aVal[0] == typeof eVal[0]) {
+        expectedJsonString += `<div  style="background-color: ${resetColor}"><code>${eKey}[</code><br/></div>`;
+        acutalJsonString += `<div  style="background-color: ${resetColor}"><code>${eKey}[</code><br/></div>`;
+        if (_isJSON(aVal[0])) {
+            let i = 0,
+                j = 0;
+            while (i < aVal.length && j < eVal.length) {
+                let diff = compareTwoJsonObject(aVal[i], eVal[j], indentation + 8);
+                acomma = ",";
+                ecomma = ",";
+                if (i == aVal.length - 1) {
+                    acomma = "";
+                }
+                if (j == eVal.length - 1) {
+                    ecomma = "";
+                }
+                acutalJsonString += `<div  style="background-color: ${resetColor}"><code style="background-color: ${resetColor}" >${space.repeat(indentation+4)}${diff[0]}${acomma}</code><br/></div>`;
+                expectedJsonString += `<div  style="background-color: ${resetColor}"><code style="background-color: ${resetColor}" >${space.repeat(indentation+4)}${diff[1]}${ecomma}</code><br/></div>`;
+                ++i;
+                ++j;
+            }
+            while (i < aVal.length) {
+                if (i == aVal.length - 1) {
+                    acomma = "";
+                }
+                let diff = _prettyJson(aVal[i], indentation + 8, extraColor, acomma);
+                acutalJsonString += `<div  style="background-color: ${extraColor}"><code>${space.repeat(indentation+4)}${diff[0]}</code></div>`; //${acomma}</code><br/></div>
+                expectedJsonString += lineBreak.repeat(diff[1]);
+                ++i;
+            }
+            while (j < eVal.length) {
+                if (j == eVal.length - 1) {
+                    ecomma = "";
+                }
+                let diff = _prettyJson(eVal[j], indentation + 8, extraColor, ecomma);
+                expectedJsonString += `<div  style="background-color: ${extraColor}"><code>${space.repeat(indentation+4)}${diff[0]}</code></div>`; //${ecomma}</code><br/></div>
+                acutalJsonString += lineBreak.repeat(diff[1]);
+                ++j;
+            }
+        } else {
+            let common = _intersection(aVal, eVal);
+            let aAlone = _difference(aVal, eVal);
+            let eAlone = _difference(eVal, aVal);
+            console.log(common, aAlone, eAlone);
+            for (let j = 0; j < common.length; j++) {
+                let commonVal = common[j];
+                acutalJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation+4)}${_prettyJson(commonVal, indentation+4, resetColor)[0]}${acomma}</code><br/></div>`;
+                expectedJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation+4)}${_prettyJson(commonVal, indentation+4, resetColor)[0]}${ecomma}</code><br/></div>`;
+            }
+            let diff = (aAlone.length > eAlone.length) ? (aAlone.length - eAlone.length) : eAlone.length - aAlone.length;
+            let isaHigher = (aAlone.length > eAlone.length) ? true : false;
+            let min = (aAlone.length > eAlone.length) ? eAlone.length: aAlone.length;
+            for (let j = 0; j < aAlone.length; j++) {
+                let aOnly = aAlone[j];
+                if(min > j) {
+                    acolor = wrongColor;
+                } else {
+                    acolor = extraColor;
+                }
+                acomma = (j==aAlone.length-1)?"":acomma;
+                acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation+4)}${_prettyJson(aOnly, indentation+4, wrongColor)[0]}${acomma}</code><br/></div>`;
+            }
+            for (let j = 0; j < eAlone.length; j++) {
+                let eOnly = eAlone[j];
+                if(min > j) {
+                    ecolor = wrongColor;
+                } else {
+                    ecolor = extraColor;
+                }
+                ecomma = (j==eAlone.length-1)?"":ecomma;
+                expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation+4)}${_prettyJson(eOnly, indentation+4, wrongColor)[0]}${ecomma}</code><br/></div>`;
+            }
+            if (isaHigher) {
+                while (diff) {
+                    expectedJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation+4)}</code><br/></div>`;
+                    --diff;
+                }
+            } else {
+                while (diff) {
+                    acutalJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation+4)}</code><br/></div>`;
+                    --diff;
+                }
+            }
+        }
+        acolor = resetColor;
+        ecolor = resetColor;
+        acutalJsonString += `<code style="background-color: ${acolor}" >${space.repeat(indentation)}]${acomma}</code><br/>`;
+        expectedJsonString += `<code style="background-color: ${ecolor}" >${space.repeat(indentation)}]${ecomma}</code><br/>`;
+    } else {
+
+    }
+    return [acutalJsonString, expectedJsonString];
+}
+
 function compare(actual, expected, indentation) {
     const me = this;
     actual = JSON.parse(actual);
     expected = JSON.parse(expected);
-    console.log(typeof actual);
-    console.log(typeof expected);
-    return compareTwoJsonObject(actual, expected, 4);
+    if(_isJSON(actual)) {
+        return compareTwoJsonObject(actual, expected, 4);
+    } else if(_isArray(actual) && _isArray(expected)) {
+        return compareArray(actual, expected, null, 0);
+    }
 }
 
 function showDiv(classname) {
@@ -304,8 +338,6 @@ function hideDiv(classname) {
 function compareAndPopualateResult() {
     let actual = $('#textarealeft').val();
     let expected = $('#textarearight').val();
-    console.log(actual);
-    console.log(expected);
     let diff = compare(actual, expected);
 
     $('#left').html(diff[0]);
