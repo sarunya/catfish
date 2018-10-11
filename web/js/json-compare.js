@@ -82,8 +82,11 @@ function _keys(object) {
 function _difference(data1, data2) {
     let difference = [];
     for (var i = 0; i < data1.length; i++) {
-        if (data2.indexOf(data1[i]) == -1) {
+        let index = data2.indexOf(data1[i]);
+        if (index == -1) {
             difference.push(data1[i]);
+        } else {
+            _removeFromArray(data2, index);
         }
     }
     return difference;
@@ -92,7 +95,7 @@ function _difference(data1, data2) {
 function _intersection(data1, data2) {
     let intersection = [];
     for (var i = 0; i < data1.length; i++) {
-        if (data2.indexOf(data1[i]) >= 0) {
+        if (data2.indexOf(data1[i]) >= 0 && intersection.indexOf(data1[i]) < 0) {
             intersection.push(data1[i]);
         }
     }
