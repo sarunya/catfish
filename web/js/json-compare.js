@@ -60,8 +60,12 @@ function _clone(obj) {
     return copy;
 }
 
+function _findNoOfLeadingSpaces(str) {
+    let pttrn = /^\s*/;
+    return str.match(pttrn)[0].length;
+}
+
 function _replaceAll (str, pattern, replace) {
-    console.log(str);
     return str.replace(new RegExp(pattern, 'g'), replace);
 }
 
@@ -86,7 +90,9 @@ function _prettyJson(json, indentation, color, comma="") {
         jsonStr = jsonStrArr[0] + "<br/>";
         let index = 1;
         for (index = 1; index < jsonStrArr.length - 1; index++) {
-            jsonStr += `<div  style="background-color: ${color}"><code>${space.repeat(indentation)}${jsonStrArr[index]}</code><br/></div>`;
+            let leadingSpace = _findNoOfLeadingSpaces(jsonStrArr[index]);
+            leadingSpace = indentation + (4 * leadingSpace/10);
+            jsonStr += `<div  style="background-color: ${color}"><code>${space.repeat(leadingSpace)}${jsonStrArr[index]}</code><br/></div>`;
             ++linesInJson
         }
         jsonStr += `<div  style="background-color: ${color}"><code>${space.repeat(indentation-4)}` + jsonStrArr[index] + comma+"</code></div>";
