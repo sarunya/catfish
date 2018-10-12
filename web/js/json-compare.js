@@ -68,9 +68,9 @@ function _replaceAll (str, pattern, replace) {
 function replaceHtmlStrings(str) {
     if(str) {
         str = _replaceAll(str, "\\\\","\\");
+        str = _replaceAll(str, "&",";&amp;");
         str = _replaceAll(str, "<","&lt;");
         str = _replaceAll(str, ">","&gt;");
-        str = _replaceAll(str, "&","&amp;");
     }
     return str;
 }
