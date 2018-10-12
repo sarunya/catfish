@@ -51,6 +51,21 @@ function _isJSON(x) {
     }
 }
 
+function _clone(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
+
+function _replaceAll (str, pattern, replace) {
+    let regex = new RegExp(pattern, 'g');
+    return str.replace(new RegExp(pattern, 'g'), replace);
+}
+
+
 function _prettyJson(json, indentation, color, comma="") {
     const me = this;
     let linesInJson = 1;
@@ -60,13 +75,13 @@ function _prettyJson(json, indentation, color, comma="") {
         jsonStr = jsonStrArr[0] + "<br/>";
         let index = 1;
         for (index = 1; index < jsonStrArr.length - 1; index++) {
-            jsonStr += `<div  style="background-color: ${color}"><code>${space.repeat(indentation)}` + jsonStrArr[index].trim() + "</code><br/></div>";
+            jsonStr += `<div  style="background-color: ${color}"><code>${space.repeat(indentation)}${jsonStrArr[index]}</code><br/></div>`;
             ++linesInJson
         }
         jsonStr += `<div  style="background-color: ${color}"><code>${space.repeat(indentation-4)}` + jsonStrArr[index] + comma+"</code></div>";
         ++linesInJson;
     } else {
-        jsonStr = jsonStr;
+        jsonStr = jsonStr+comma;
     }
     return [jsonStr, linesInJson];
 }
@@ -81,6 +96,7 @@ function _keys(object) {
 
 function _difference(data1, data2) {
     let difference = [];
+    data2 = _clone(data2);
     for (var i = 0; i < data1.length; i++) {
         let index = data2.indexOf(data1[i]);
         if (index == -1) {
@@ -223,8 +239,7 @@ function compareArray(aVal, eVal, eKey, indentation) {
         expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${eKey}${_prettyJson(eVal, indentation, ecolor, ecomma)[0]}</code></div>`;
         expectedJsonString += lineBreak.repeat(prettyVal[1] - 1);
         acutalJsonString += `<div  style="background-color: ${acolor}"><code>${eKey}${prettyVal[0]}</code></div>`;
-    } 
-    else if (typeof aVal[0] == typeof eVal[0]) {
+    } else if (typeof aVal[0] == typeof eVal[0]) {
         expectedJsonString += `<div  style="background-color: ${resetColor}"><code>${eKey}[</code><br/></div>`;
         acutalJsonString += `<div  style="background-color: ${resetColor}"><code>${eKey}[</code><br/></div>`;
         if (_isJSON(aVal[0])) {
@@ -267,7 +282,6 @@ function compareArray(aVal, eVal, eKey, indentation) {
             let common = _intersection(aVal, eVal);
             let aAlone = _difference(aVal, eVal);
             let eAlone = _difference(eVal, aVal);
-            console.log(common, aAlone, eAlone);
             for (let j = 0; j < common.length; j++) {
                 let commonVal = common[j];
                 acutalJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation+4)}${_prettyJson(commonVal, indentation+4, resetColor)[0]}${acomma}</code><br/></div>`;
@@ -313,7 +327,45 @@ function compareArray(aVal, eVal, eKey, indentation) {
         acutalJsonString += `<code style="background-color: ${acolor}" >${space.repeat(indentation)}]${acomma}</code><br/>`;
         expectedJsonString += `<code style="background-color: ${ecolor}" >${space.repeat(indentation)}]${ecomma}</code><br/>`;
     } else {
+        ecolor = wrongColor;
+        acolor = wrongColor;
+        acomma = ",";
+        ecomma = ",";
+        let adiff, ediff ;
+        let max = (aVal.length>eVal.length)?aVal.length:eVal.length;
+        expectedJsonString += `<div  style="background-color: ${resetColor}"><code>${eKey}[</code><br/></div>`;
+        acutalJsonString += `<div  style="background-color: ${resetColor}"><code>${eKey}[</code><br/></div>`;
+        indentation = indentation+4;
+        for(let j=0;j<max;j++) {
+            acolor = (j==eVal.length)?extraColor:acolor;
+            ecolor = (j==aVal.length)?extraColor:ecolor;
+            acomma = (j==aVal.length-1)?"": acomma;
+            ecomma = (j==eVal.length-1)?"": ecomma;
+            if(j<aVal.length) {
+                adiff = _prettyJson(aVal[j], indentation+4, acolor, acomma);
+                acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey}${adiff[0]}</code></div>`;
+                adiff = adiff[1];
+            }else {
+                adiff = 0;
+            }
 
+            if(j<eVal.length) {
+                ediff = _prettyJson(eVal[j], indentation+4, ecolor, ecomma);
+                expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey}${ediff[0]}</code></div>`;
+                ediff = ediff[1];
+            }else {
+                ediff = 0;
+            }
+
+            if(adiff > ediff) {
+                expectedJsonString += lineBreak.repeat(adiff - ediff);
+            } else if(adiff < ediff) {
+                acutalJsonString += lineBreak.repeat(ediff - adiff);
+            }
+        }
+        indentation = indentation-4;
+        acutalJsonString += `<code style="background-color: ${resetColor}" >${space.repeat(indentation)}]${acomma}</code><br/>`;
+        expectedJsonString += `<code style="background-color: ${resetColor}" >${space.repeat(indentation)}]${ecomma}</code><br/>`;
     }
     return [acutalJsonString, expectedJsonString];
 }
@@ -323,9 +375,14 @@ function compare(actual, expected, indentation) {
     actual = JSON.parse(actual);
     expected = JSON.parse(expected);
     if(_isJSON(actual)) {
-        return compareTwoJsonObject(actual, expected, 4);
+        let data = compareTwoJsonObject(actual, expected, 4);
+        data[0] = _replaceAll(data[0], "\\\\","\\");
+        data[1] = _replaceAll(data[1], "\\\\","\\");
     } else if(_isArray(actual) && _isArray(expected)) {
-        return compareArray(actual, expected, null, 0);
+        let data = compareArray(actual, expected, null, 0);
+        data[0] = _replaceAll(data[0], "\\\\","\\");
+        data[1] = _replaceAll(data[1], "\\\\","\\");
+        return data;
     }
 }
 
