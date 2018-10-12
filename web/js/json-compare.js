@@ -91,10 +91,8 @@ function _prettyJson(json, indentation, color, comma="") {
         let index = 1;
         for (index = 1; index < jsonStrArr.length - 1; index++) {
             let leadingSpace = _findNoOfLeadingSpaces(jsonStrArr[index]);
-            console.log(leadingSpace, jsonStrArr[index]);
             leadingSpace = (leadingSpace/10) - 1;
             leadingSpace = (leadingSpace > 0) ? indentation + (4 * leadingSpace): indentation;
-            console.log(indentation, leadingSpace);
             jsonStr += `<div  style="background-color: ${color}"><code>${space.repeat(leadingSpace)}${jsonStrArr[index].trim()}</code><br/></div>`;
             ++linesInJson
         }
