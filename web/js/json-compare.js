@@ -51,6 +51,21 @@ function _isJSON(x) {
     }
 }
 
+function _clone(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
+
+function _replaceAll (str, pattern, replace) {
+    let regex = new RegExp(pattern, 'g');
+    return str.replace(new RegExp(pattern, 'g'), replace);
+}
+
+
 function _prettyJson(json, indentation, color, comma="") {
     const me = this;
     let linesInJson = 1;
@@ -81,6 +96,7 @@ function _keys(object) {
 
 function _difference(data1, data2) {
     let difference = [];
+    data2 = _clone(data2);
     for (var i = 0; i < data1.length; i++) {
         let index = data2.indexOf(data1[i]);
         if (index == -1) {
@@ -266,7 +282,6 @@ function compareArray(aVal, eVal, eKey, indentation) {
             let common = _intersection(aVal, eVal);
             let aAlone = _difference(aVal, eVal);
             let eAlone = _difference(eVal, aVal);
-            console.log(common, aAlone, eAlone);
             for (let j = 0; j < common.length; j++) {
                 let commonVal = common[j];
                 acutalJsonString += `<div  style="background-color: ${resetColor}"><code>${space.repeat(indentation+4)}${_prettyJson(commonVal, indentation+4, resetColor)[0]}${acomma}</code><br/></div>`;
@@ -360,9 +375,14 @@ function compare(actual, expected, indentation) {
     actual = JSON.parse(actual);
     expected = JSON.parse(expected);
     if(_isJSON(actual)) {
-        return compareTwoJsonObject(actual, expected, 4);
+        let data = compareTwoJsonObject(actual, expected, 4);
+        data[0] = _replaceAll(data[0], "\\\\","\\");
+        data[1] = _replaceAll(data[1], "\\\\","\\");
     } else if(_isArray(actual) && _isArray(expected)) {
-        return compareArray(actual, expected, null, 0);
+        let data = compareArray(actual, expected, null, 0);
+        data[0] = _replaceAll(data[0], "\\\\","\\");
+        data[1] = _replaceAll(data[1], "\\\\","\\");
+        return data;
     }
 }
 
