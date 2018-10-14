@@ -34,16 +34,16 @@
 
 	<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
 
-  <!-- CodeMirror and its JavaScript mode file -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/mode/javascript/javascript.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css" />
+	<!-- CodeMirror and its JavaScript mode file -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/mode/javascript/javascript.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css" />
 
-  <!-- Firepad -->
-  <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
-  <script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
-  <style>
-    /* Height / width / positioning can be customized for your use case.
+	<!-- Firepad -->
+	<link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
+	<script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
+	<style>
+		/* Height / width / positioning can be customized for your use case.
        For demo purposes, we make firepad fill the entire browser. */
     .firepad {
       height: 1100px;
@@ -58,19 +58,20 @@
 			<div class="nav_top_fx_w3ls_agileinfo">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					    aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+					 aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
 					<div class="logo-w3layouts-agileits">
-						<h1> <a class="navbar-brand" href="index.html"><i class="fa fa-clone" aria-hidden="true"></i> CatFish <span class="desc">For your Development</span></a></h1>
+						<h1> <a class="navbar-brand" href="index.html"><i class="fa fa-clone" aria-hidden="true"></i> CatFish <span class="desc">For
+									your Development</span></a></h1>
 					</div>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<div class="nav_right_top">
-						
+
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="index.html">Home</a></li>
 						</ul>
@@ -84,37 +85,37 @@
 	<div class="services-breadcrumb">
 		<div class="inner_breadcrumb">
 			<ul class="short">
-                    <li><a href="index.html">Home</a><span>|</span></li>
-                    <li>Interview Zone<span>|</span></li>
-                    <li><a href="utc.html">UTC Time</a><span>|</span></li>
-					<li><a href="json-comparison.html">Compare Json</a><span>|</span></li>
-					<li><a href="array-comparison.html">Compare List</a><span>|</span></li>
-					<li><a href="base64-encrypt.html">Base64</a></li>
-                </ul>
-        </div>
+				<li><a href="index.html">Home</a><span>|</span></li>
+				<li>Code Share<span>|</span></li>
+				<li><a href="utc.html">UTC Time</a><span>|</span></li>
+				<li><a href="json-comparison.html">Compare Json</a><span>|</span></li>
+				<li><a href="array-comparison.html">Compare List</a><span>|</span></li>
+				<li><a href="base64-encrypt.html">Base64</a></li>
+			</ul>
+		</div>
 	</div>
 	<!--//banner_info-->
 	<!-- /inner_content -->
 	<div>
-		<div class="container" style="width:100%;padding-top: 2px" >
+		<div class="container" style="width:100%;padding-top: 2px">
 			<div class="col-md-12">
 				<div class="business">
-					
+					<button style="background-color: #ff3c41; color: white; font-size: 1.0em;" onclick="loadFirebase(true)">NEW DOCUMENT</button>
 					<div class="comment">
-						<h3>Share your code here <a id = "link" target="_blank" href = "tinyurl.com/api-create.php?url=" style="font-size: 15px">(Get short link)</a></h3>
+						<h3>Share your code here <a id="link" target="_blank" href="tinyurl.com/api-create.php?url=" style="font-size: 15px">(Get
+								short link)</a></h3>
 						<div class="comment-bottom">
 							<form action="#" method="post">
 
-								<div id = "firepad-container" name="Message" placeholder="Code..." required="" style="
-								min-height: 1200px;color:#333333; font-size: 20px;
-							"></div>
+								<div id="firepad-container" name="Message" placeholder="Code..." required="" style="
+								min-height: 1200px;color:#333333; font-size: 20px;"></div>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- technology-right -->
-			
+
 			<div class="clearfix"></div>
 		</div>
 	</div>
@@ -165,7 +166,7 @@
 						</ul>
 					</div>
 					<div class="col-md-3 sign-gd flickr-post">
-						
+
 					</div>
 					<div class="col-md-5 sign-gd-two">
 						<h4>Contact <span>Information</span></h4>
@@ -218,8 +219,6 @@
 	<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<!-- start-smoth-scrolling -->
-	<script type="text/javascript" src="js/move-top.js"></script>
-	<script type="text/javascript" src="js/easing.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function ($) {
 			$(".scroll").click(function (event) {
@@ -239,56 +238,110 @@
 			$(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
 		});
 	</script>
-	<script type="text/javascript">	
-
-	setTimeout(function(){ 
-		$('.powered-by-firepad').remove()
-			 }, 3000);
-
+	<script type="text/javascript">
+		setTimeout(function () {
+			$('.powered-by-firepad').remove()
+		}, 3000);
 	</script>
-	 <script>
-		function init() {
-		  //// Initialize Firebase.
-		  //// TODO: replace with your Firebase project configuration.
-		  var config = {
-			apiKey: "AIzaSyC_JdByNm-E1CAJUkePsr-YJZl7W77oL3g",
-			authDomain: "firepad-tests.firebaseapp.com",
-			databaseURL: "https://firepad-tests.firebaseio.com"
-		  };
-		  firebase.initializeApp(config);
-		  //// Get Firebase Database reference.
-		  var firepadRef = getExampleRef();
-		  //// Create CodeMirror (with line numbers and the JavaScript mode).
-		  var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
-			lineNumbers: true,
-			mode: 'javascript'
-		  });
-		  //// Create Firepad.
-		  var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-			defaultText: 'Put your code here'
-		  });
-		  
-		}
-		// Helper to get hash from end of URL or generate a random one.
-		function getExampleRef() {
-		  var ref = firebase.database().ref();
-		  var hash = window.location.hash.replace(/#/g, '');
-		  if (hash) {
-			ref = ref.child(hash);
-		  } else {
-			ref = ref.push(); // generate unique location.
-			window.location = window.location + '#' + ref.key; // add it as a hash to the URL.
-		  }
-		  if (typeof console !== 'undefined') {
-			console.log('Firebase data: ', ref.toString());
-		  }
-		  let url = window.location.origin +'/get-tiny-url?url=' + encodeURIComponent(window.location.href);
-		  $("#link").attr("href", url);
-		  return ref;
+	<script>
+		function init(newDocument) {
+			//// Initialize Firebase.
+			//// TODO: replace with your Firebase project configuration.
+			var config = {
+				apiKey: "AIzaSyC_JdByNm-E1CAJUkePsr-YJZl7W77oL3g",
+				authDomain: "firepad-tests.firebaseapp.com",
+				databaseURL: "https://firepad-tests.firebaseio.com"
+			};
+			firebase.initializeApp(config);
+			//// Get Firebase Database reference.
+			loadFirebase(newDocument);
+
 		}
 
-		
-	  </script>
+		function loadFirebase(newDocument) {
+			var firepadRef = getExampleRef(newDocument);
+			//// Create CodeMirror (with line numbers and the JavaScript mode).
+			var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
+				lineNumbers: true,
+				mode: 'javascript'
+			});
+			//// Create Firepad.
+			var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
+				defaultText: 'Put your code here'
+			});
+		}
+
+		// Helper to get hash from end of URL or generate a random one.
+		function getExampleRef(newDocument = false) {
+			var ref = firebase.database().ref();
+			var visitorId = getVisitorId();
+
+			var xhttp1 = new XMLHttpRequest();
+			xhttp1.onreadystatechange = function () {
+				var hash = window.location.hash.replace(/#/g, '');
+				if (this.readyState == 4 && this.status == 200 ) {
+					hash = (hash.trim().length > 0) ? hash : this.responseText;
+
+					if (!newDocument && hash.length > 0) {
+						ref = ref.child(hash);
+						window.location = window.location.origin + window.location.pathname + '#' + ref.key; // add it as a hash to the URL.
+						hash = ref.key;
+					} else {
+						ref = ref.push(); // generate unique location.
+						window.location = window.location.origin + window.location.pathname + '#' + ref.key; // add it as a hash to the URL.
+						hash = ref.key;
+					}
+					if (typeof console !== 'undefined') {
+						console.log('Firebase data: ', ref.toString());
+					}
+					let url = window.location.origin + '/get-tiny-url?url=' + encodeURIComponent(window.location.href);
+					$("#link").attr("href", url);
+					updateCodeShareForVisitor(visitorId, hash);
+					return ref;
+				};
+
+			}
+			let host = window.location.origin;
+			if (host.startsWith("file")) {
+				host = "http://localhost:1337";
+			}
+			xhttp1.open("POST", host + '/get-code-map', true);
+			xhttp1.setRequestHeader("Content-type", "application/json");
+			xhttp1.setRequestHeader('Access-Control-Allow-Origin', '*');
+			xhttp1.send(JSON.stringify({
+				visitor_id: visitorId
+			}));
+		}
+
+		function getVisitorId() {
+			var req = new XMLHttpRequest();
+			req.open('GET', window.location.href, false);
+			req.send(null);
+			var headers = req.getAllResponseHeaders().toLowerCase();
+			return req.getResponseHeader("visitor_id");
+		}
+
+		function updateCodeShareForVisitor(visitorId, hash) {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					console.log(this.responseText);
+				}
+			};
+
+			let host = window.location.origin;
+			if (host.startsWith("file")) {
+				host = "http://localhost:1337";
+			}
+			xhttp.open("POST", host + '/visitor-map', true);
+			xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+			xhttp.send(JSON.stringify({
+				visitor_id: visitorId,
+				hash: hash
+			}));
+		}
+	</script>
 
 	<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 
