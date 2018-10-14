@@ -302,8 +302,9 @@
 					var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
 						defaultText: 'Put your code here'
 					});
-
-
+					if(newDocument) {
+						document.location.reload() ;
+					}
 					return ref;
 				};
 
