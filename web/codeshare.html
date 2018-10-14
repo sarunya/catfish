@@ -100,7 +100,8 @@
 		<div class="container" style="width:100%;padding-top: 2px">
 			<div class="col-md-12">
 				<div class="business">
-					<button style="background-color: #ff3c41; color: white; font-size: 1.0em; height: 40px; font-weight: bold" onclick="loadFirebase(true)">NEW DOCUMENT</button>
+					<button style="background-color: #ff3c41; color: white; font-size: 1.0em; height: 40px; font-weight: bold" onclick="loadFirebase(true)">NEW
+						DOCUMENT</button>
 					<div class="comment">
 						<h3>Share your code here <a id="link" target="_blank" href="tinyurl.com/api-create.php?url=" style="font-size: 15px">(Get
 								short link)</a></h3>
@@ -260,15 +261,7 @@
 
 		function loadFirebase(newDocument) {
 			var firepadRef = getExampleRef(newDocument);
-			//// Create CodeMirror (with line numbers and the JavaScript mode).
-			var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
-				lineNumbers: true,
-				mode: 'javascript'
-			});
-			//// Create Firepad.
-			var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-				defaultText: 'Put your code here'
-			});
+
 		}
 
 		// Helper to get hash from end of URL or generate a random one.
@@ -279,7 +272,7 @@
 			var xhttp1 = new XMLHttpRequest();
 			xhttp1.onreadystatechange = function () {
 				var hash = window.location.hash.replace(/#/g, '');
-				if (this.readyState == 4 && this.status == 200 ) {
+				if (this.readyState == 4 && this.status == 200) {
 					hash = (hash.trim().length > 0) ? hash : this.responseText;
 
 					if (!newDocument && hash.length > 0) {
@@ -297,6 +290,20 @@
 					let url = window.location.origin + '/get-tiny-url?url=' + encodeURIComponent(window.location.href);
 					$("#link").attr("href", url);
 					updateCodeShareForVisitor(visitorId, hash);
+
+
+					var firepadRef = ref;
+					//// Create CodeMirror (with line numbers and the JavaScript mode).
+					var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
+						lineNumbers: true,
+						mode: 'javascript'
+					});
+					//// Create Firepad.
+					var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
+						defaultText: 'Put your code here'
+					});
+
+
 					return ref;
 				};
 
