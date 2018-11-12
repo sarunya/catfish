@@ -1,0 +1,18 @@
+{
+    "userinfo": {
+        "Email": "email",
+        "Data": "data",
+        "CreatedDate": "created_date",
+        "ModifiedDate": "modified_date"
+    },
+    "taskinfo": {
+        "Id": "id",
+        "Data": "data",
+        "CreatedDate": "created_date",
+        "ModifiedDate": "modified_date"
+    },
+    "TableNames": {
+        "UserInfo": "userinfo",
+        "TaskInfo": "taskinfo"
+    }
+}

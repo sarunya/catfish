@@ -1,0 +1,11 @@
+{
+    "postgres": {
+        "connectionstring": "postgres://ecomdba:ecomdba@localhost/catfish",
+        "poolSize": 10,
+        "tables": {
+            "ProductCatalogs": "ProductCatalogs",
+            "PrivateStores": "PrivateStores",
+            "PrivateStoreGroups": "PrivateStoreGroups"
+        }
+    }
+}
