@@ -32,8 +32,8 @@
     <link href="css/font-awesome.css" rel="stylesheet">
     <!-- //for bootstrap working -->
 
-    <link rel="stylesheet" href="./css/base64-encrypt.css">
-    <script type="text/javascript" src="./js/encoding.js"></script>
+    <link rel="stylesheet" href="./css/timestamp.css">
+    <script type="text/javascript" src="./js/timestamp.js"></script>
     
 </head>
 
@@ -78,25 +78,22 @@
                 <li><a href="json-comparison.html">Compare Json</a><span>|</span></li>
                 <li><a href="string-compare.html">String Diff</a><span>|</span></li>
                 <li><a href="array-comparison.html">Compare List</a><span>|</span></li>
-                <li>Base64<span>|</span></li>
-                <li><a href="timestamp.html">Timestamp</a></li>
+                <li><a href="base64-encrypt.html">Base64 Encode</a><span>|</span></li>
+                <li>Timestamp</li>
             </ul>
         </div>
     </div><br>
     <!-- banner -->
     <div class="container">
         <div class="top">
-            <div class="leftpane">
-                <p>Text Before: </p><textarea id="text1"></textarea>
-            </div>
-        </div>
-        <div class="center">
-            <button id="encode" onclick="base64Encode()">ENCODE</button>
-            <button id="decode" onclick="base64Decode()">DECODE</button>
-        </div>
-        <div class="bottom">
-            <div class="leftpane">
-                <p>Text After: </p><textarea id="text2"></textarea>
+            <div class="centerpane">
+                <p>Unix Timestamp To Date: </p>
+                <textarea id="timestamp"></textarea>
+                <button id="convert" onclick="timestampToDate()">CONVERT</button>
+                <div class="center">
+                    <div id="UTC"></div>
+                    <div id="LocalTime"></div>
+                </div>
             </div>
         </div>
     </div>

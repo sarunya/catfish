@@ -28,7 +28,6 @@ function start() {
   });
   app.get('/codeshare.html$', (req, res) => {
     sess=req.session;
-    console.log("insided alone visitor id is ", sess.visitor_id, req.url);
     if(sess.visitor_id) {
           res.header({"visitor_id": sess.visitor_id});
           res.render('codeshare.html');
