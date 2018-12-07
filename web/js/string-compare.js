@@ -59,7 +59,15 @@ function getHighlightedText(i1, i2, lcsi1, lcsi2) {
     let diffNum2 = lcsi2 - i2;
     let result1 = "";
     let result2 = "";
-    if(diffNum1 > diffNum2) {
+    console.log(diffNum1, diffNum2);
+    if(diffNum1 == diffNum2) {
+        result1 += `<span style="background-color: #f44a41">${str1.substr(i1, (diffNum2))}</span>`;
+        result2 += `<span style="background-color: #f44a41">${str2.substr(i2, (diffNum1))}</span>`;
+        i1 += diffNum2;
+        i2 += diffNum1;        
+        diffNum1 = 0;
+        diffNum2 = 0;
+    } else if(diffNum1 > diffNum2) {
         result1 += `<span style="background-color: #f44a41">${str1.substr(i1, (diffNum2))}</span>`;
         diffNum1 -= diffNum2;
         i1 += diffNum2;
@@ -126,5 +134,3 @@ function printLcs() {
 
     return getSentenceDiff(str1Index, str2Index);
 }
-
-
