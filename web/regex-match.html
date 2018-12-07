@@ -32,8 +32,8 @@
     <link href="css/font-awesome.css" rel="stylesheet">
     <!-- //for bootstrap working -->
 
-    <link rel="stylesheet" href="./css/base64-encrypt.css">
-    <script type="text/javascript" src="./js/encoding.js"></script>
+    <link rel="stylesheet" href="./css/regex-match.css">
+    <script type="text/javascript" src="./js/regex-match.js"></script>
     
 </head>
 
@@ -76,10 +76,8 @@
                 <li><a href="codeshare.html">Code Share</a><span>|</span></li>
                 <li><a href="utc.html">UTC TIME FORMAT</a><span>|</span></li>
                 <li><a href="json-comparison.html">Compare Json</a><span>|</span></li>
-                <li><a href="string-compare.html">String Diff</a><span>|</span></li>
                 <li><a href="array-comparison.html">Compare List</a><span>|</span></li>
-                <li>Base64<span>|</span></li>
-                <li><a href="timestamp.html">Timestamp</a></li>
+                <li><a href="base64-encrypt.html">Base64 Encode</a></li>
             </ul>
         </div>
     </div><br>
@@ -87,16 +85,16 @@
     <div class="container">
         <div class="top">
             <div class="leftpane">
-                <p>Text Before: </p><textarea id="text1"></textarea>
+                <p>Regex To Match: </p><textarea id="text1"></textarea>
             </div>
         </div>
         <div class="center">
-            <button id="encode" onclick="base64Encode()">ENCODE</button>
-            <button id="decode" onclick="base64Decode()">DECODE</button>
+            <button id="encode" onclick="match()">MATCH</button>
+            <button id="decode" onclick="unmatch()">UNMATCH</button>
         </div>
         <div class="bottom">
             <div class="leftpane">
-                <p>Text After: </p><textarea id="text2"></textarea>
+                <p>Text: </p><textarea id="text2"></textarea>
             </div>
         </div>
     </div>
@@ -171,16 +169,6 @@
                     <div class="col-md-5 sign-gd-two">
                         <h4>Contact <span>Information</span></h4>
                         <div class="address">
-                            <!-- <div class="address-grid">
-								<div class="address-left">
-									<i class="fa fa-phone" aria-hidden="true"></i>
-								</div>
-								<div class="address-right">
-									<h6>Phone Number</h6>
-									<p>+1 234 567 8901</p>
-								</div>
-								<div class="clearfix"> </div>
-							</div> -->
                             <div class="address-grid">
                                 <div class="address-left">
                                     <i class="fa fa-envelope" aria-hidden="true"></i>

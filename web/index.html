@@ -30,8 +30,8 @@
 	<link href="css/prettyPhoto.css" rel="stylesheet" type="text/css" />
 	<link href="css/font-awesome.css" rel="stylesheet">
 	<!-- //for bootstrap working -->
-	<link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,300,300i,400,400i,500,500i,600,600i,700,800" rel="stylesheet">
-	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700" rel="stylesheet">
+	<!-- <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,300,300i,400,400i,500,500i,600,600i,700,800" rel="stylesheet"> -->
+	<!-- <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -85,7 +85,7 @@
 								<a class="act" href="codeshare.html">Code Share</a>
 							</div>
 							<div class="bnr-button">
-								<a class="act" href="utc.html">UTC Time</a>
+								<a class="act" href="utc.html">UTC TIME FORMAT</a>
 							</div>
 							<div class="bnr-button">
 								<a class="act" href="json-comparison.html">Compare JSON</a>
@@ -527,16 +527,35 @@
 
 	<!-- js -->
 	<!-- Smooth-Scrolling-JavaScript -->
+	<script type="text/javascript" src="js/easing.js"></script>
+	<!-- <script type="text/javascript" src="js/move-top.js"></script> -->
 	<script type="text/javascript">
-		jQuery(document).ready(function ($) {
-			$(".scroll, .navbar li a, .footer li a").click(function (event) {
-				$('html,body').animate({
-					scrollTop: $(this.hash).offset().top
-				}, 1000);
-			});
-		});
+		// jQuery(document).ready(function ($) {
+		// 	$(".scroll, .navbar li a, .footer li a").click(function (event) {
+		// 		$('html,body').animate({
+		// 			scrollTop: $(this.hash).offset().top
+		// 		}, 1000);
+		// 	});
+		// });
 	</script>
 	<!-- //Smooth-Scrolling-JavaScript -->
+	<script type="text/javascript">
+		// $(document).ready(function () {
+		// 	/*
+		// 							var defaults = {
+		// 					  			containerID: 'toTop', // fading element id
+		// 								containerHoverID: 'toTopHover', // fading element hover id
+		// 								scrollSpeed: 1200,
+		// 								easingType: 'linear' 
+		// 					 		};
+		// 							*/
+
+		// 	$().UItoTop({
+		// 		easingType: 'easeOutQuart'
+		// 	});
+
+		// });
+	</script>
 	<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 	<!-- jQuery-Photo-filter-lightbox-Gallery-plugin -->
 	<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
