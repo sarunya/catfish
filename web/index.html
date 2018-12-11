@@ -26,9 +26,11 @@
 	</script>
 	<!--//tags -->
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/index.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="css/prettyPhoto.css" rel="stylesheet" type="text/css" />
 	<link href="css/font-awesome.css" rel="stylesheet">
+	<script src="js/user-service.js" type="text/javascript" charset="utf-8"></script>
 	<!-- //for bootstrap working -->
 	<!-- <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,300,300i,400,400i,500,500i,600,600i,700,800" rel="stylesheet"> -->
 	<!-- <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700" rel="stylesheet"> -->
@@ -55,9 +57,11 @@
 					<div class="nav_right_top">
 						
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="index.html">Home</a></li>
-							<li class="btn btn-primary pb-modalreglog-submit" data-toggle="modal" data-target="#myModal">Login</li>
-							<li class="btn btn-primary pb-modalreglog-submit" data-toggle="modal" data-target="#myModal2">Register</li>
+							<li class="active" ><a href="index.html">Home</a></li>
+							<li class="active" style="margin-left:20px;" data-toggle="modal" data-target="#myModal"><a data-toggle="modal" data-target="#myModal">login</a></li>
+							<li class="active" style="margin-left:20px;" data-toggle="modal" data-target="#myModal2"><a data-toggle="modal" data-target="#myModal">register</a></li>
+							<!-- <li class="btn btn-primary pb-modalreglog-submit" data-toggle="modal" data-target="#myModal" style="background-color:#ff3c41">LOGIN</li>
+							<li class="btn btn-primary pb-modalreglog-submit" data-toggle="modal" data-target="#myModal2" style="background-color:#ff3c41">REGISTER</li> -->
 						</ul>
 					</div>
 				</div>
@@ -222,6 +226,20 @@
 										<div id="pb-modalreglog-progressbar"></div>
 									</div>
 									<div class="form-group">
+										<label for="confirmpassword">First Name</label>
+										<div class="input-group pb-modalreglog-input-group">
+											<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+											<input type="text" class="form-control" id="firstname" placeholder="firstname">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="country">Last Name</label>
+										<div class="input-group pb-modalreglog-input-group">
+											<span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+											<input type="text" class="form-control" id="lastname" placeholder="Country">
+										</div>
+									</div>
+									<div class="form-group">
 										<label for="email">Email address</label>
 										<div class="input-group pb-modalreglog-input-group">
 											<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
@@ -235,38 +253,15 @@
 											<input type="password" class="form-control" id="inputPws" placeholder="Password">
 										</div>
 									</div>
-									<div class="form-group">
-										<label for="confirmpassword">Confirm password</label>
-										<div class="input-group pb-modalreglog-input-group">
-											<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-											<input type="password" class="form-control" id="inputConfirmPws" placeholder="Confirm Password">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="country">Country</label>
-										<div class="input-group pb-modalreglog-input-group">
-											<span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
-											<input type="text" class="form-control" id="countries" placeholder="Country">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="age">Age</label>
-										<div class="input-group pb-modalreglog-input-group">
-											<input id="age">
-										</div>
-									</div>
-									<div class="form-group">
-										<input type="checkbox" id="ch" name="chs">
-										I agree with <a href="#">terms and conditions.</a>
-									</div>
 								</form>
 							</div>
-							<div class="modal-footer">
+							<div class="modal-footer" style="padding-left: 50%">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Sign up</button>
+								<button type="button" class="btn btn-primary" id="signup" onclick="addNewUser()">Sign up</button>
 							</div>
 						</div>
 					</div>
+					<div id="loading" class="loading style-2" style="display: none;"><div class="loading-wheel"></div></div>
 				</div>
 			</div>
 		</div>
