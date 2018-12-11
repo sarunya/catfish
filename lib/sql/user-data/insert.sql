@@ -1,0 +1,1 @@
+INSERT INTO user_info (id, data) VALUES ($1, $2) returning data;

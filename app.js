@@ -1,19 +1,39 @@
-const express = require('express')
-const app = express();
-var session = require('express-session');
-var cors = require('cors')
-var path = require('path');
-var guid = require('uuid');
-const TinyUrlRouteHandler = require('./lib/route-handler/tiny-url-route-handler');
-const ComparisonRouteHandler = require('./lib/route-handler/comparison-route-handler');
-const VisitorMapHandler = require('./lib/route-handler/visitor-map-handler');
+"use strict"
+
+const express = require('express'),
+app = express(),
+session = require('express-session'),
+cors = require('cors'),
+nconf = require('nconf'),
+path = require('path'),
+guid = require('uuid'),
+db = require('./lib/data-access/pgp').db,
+TinyUrlRouteHandler = require('./lib/route-handler/tiny-url-route-handler'),
+VisitorMapHandler = require('./lib/route-handler/visitor-map-handler'),
+UserRouteHandler = require('./lib/route-handler/user-route-handler');
 
 function start() {
+  let cwd = process.cwd();
   let dependencies = {};
-  let tinyUrlRouteHandler = new TinyUrlRouteHandler(dependencies)
-  let visitorMapHandler = new VisitorMapHandler(dependencies)
-  let comparisonRouteHandler = new ComparisonRouteHandler(dependencies)
+
+  nconf.env().argv();
+  if (nconf.get('config')) {
+    console.log(path.join(cwd, nconf.get('config')));
+    dependencies.config = require(path.join(cwd, nconf.get('config')));
+  } else {
+    console.log("Config not found");
+    process.exit();
+  }
+  dependencies.pgpCatFish = db(dependencies.config.postgres.connection_string_orders, dependencies.config.postgres.poolSize);
+
+
+  let tinyUrlRouteHandler = new TinyUrlRouteHandler(dependencies);
+  let visitorMapHandler = new VisitorMapHandler(dependencies);
+  let userRouteHandler = new UserRouteHandler(dependencies);
+  
   app.use(express.json())
+  
+  //For Cross Origin (CORS)
   app.use(session({secret: 'ssshhhhh'}));
   app.use(cors())
   app.options('*', cors()) 
@@ -26,6 +46,8 @@ function start() {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
   });
+
+
   app.get('/codeshare.html$', (req, res) => {
     sess=req.session;
     if(sess.visitor_id) {
@@ -48,9 +70,12 @@ function start() {
   app.get('/get-tiny-url', (req, res) => {
     return tinyUrlRouteHandler.getTinyUrl(req, res)
   })
-  app.post('/array-companison', (req, res) => {
-    return comparisonRouteHandler.arrayComparison(req, res)
+
+  //user functions
+  app.post('/add-user', (req, res) => {
+    return userRouteHandler.addNewUser(req, res);
   })
+
   app.use(express.static(path.join(__dirname, 'web')));
   var port = process.env.PORT || 1337;
   console.log(port);
