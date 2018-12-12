@@ -37,10 +37,43 @@ function _addNewUser(email, password, firstname, lastname) {
     if(host.startsWith("file")) {
         host = "http://localhost:1337";
     }
-    xhttp.open("POST",host+'/add-user', true);
+    xhttp.open("PUT",host+'/register-user', true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
     xhttp.send(JSON.stringify(payload));
+
+}
+
+function _loginUser(email, password) {
+
+    showDiv('.loading.style-2');
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        console.log("status code here is ", this.status, this.readyState);
+        if (this.readyState == 4 && this.status == 200) {
+            let data = JSON.parse(this.responseText);
+            console.log(JSON.stringify(data, null, 10));
+            hideDiv('.loading.style-2');
+            hideDiv('#myModal2');
+            //do anything with success response
+        } else if(this.readyState == 4) {
+            hideDiv('.loading.style-2');
+            //show proper error response to user
+        }
+    };
+
+    let payload = {
+        email : email,
+        password : password
+    };
+    let host = window.location.origin;
+    if(host.startsWith("file")) {
+        host = "http://localhost:1337";
+    }
+    xhttp.open("GET",host+`/login-user?email=${email}&password=${password}`, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    //xhttp.send(JSON.stringify(payload));
 
 }
 

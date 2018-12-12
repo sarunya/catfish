@@ -24,7 +24,8 @@
     "uuid": "^2.0.3",
     "body-parser": "^1.7.0",
     "ejs": "^1.0.0",
-    "express-session": "^1.7.6"
+    "express-session": "^1.7.6",
+    "shortid32": "^0.1.1"
   },
   "scripts": {
     "start": "node index.js"

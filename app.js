@@ -49,7 +49,7 @@ function start() {
 
 
   app.get('/codeshare.html$', (req, res) => {
-    sess=req.session;
+    var sess=req.session;
     if(sess.visitor_id) {
           res.header({"visitor_id": sess.visitor_id});
           res.render('codeshare.html');
@@ -72,7 +72,11 @@ function start() {
   })
 
   //user functions
-  app.post('/add-user', (req, res) => {
+  app.put('/register-user', (req, res) => {
+    return userRouteHandler.addNewUser(req, res);
+  })
+
+  app.get('/login-user', (req, res) => {
     return userRouteHandler.addNewUser(req, res);
   })
 
