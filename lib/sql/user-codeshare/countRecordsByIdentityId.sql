@@ -1,2 +1,2 @@
 SELECT count(*)
-FROM user_info where data->>'identity_id'=$1;
+FROM codeshare_data where data->>'identity_id'=$1;

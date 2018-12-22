@@ -1,3 +1,11 @@
+var identityIdStr = "identity_id";
+var loginId = "#loginBtn";
+var registerId = "#registerBtn";
+var logoutId = '#logoutBtn';
+var loadingCss = '.loading.style-2';
+var registerModalId = '#myModal2';
+var loginModalId = "#myModal";
+
 function addNewUser() {
     let inputEmail = document.getElementById("inputEmail").value;
     let inputPws = document.getElementById("inputPws").value;
@@ -5,6 +13,26 @@ function addNewUser() {
     let lastname = document.getElementById("lastname").value;
     _addNewUser(inputEmail, inputPws, firstname, lastname);
 }
+
+function loginUser() {
+    let inputEmail = document.getElementById("email").value;
+    let inputPws = document.getElementById("pws").value;
+    _loginUser(inputEmail, inputPws);
+}
+
+function logoutUser() {
+
+    //Set IdentityId 
+    eraseCookie(identityIdStr);
+
+    //Remove login and register icons
+    hideModal(registerModalId);
+    hideModal(loginModalId);
+    showDiv(loginId);
+    showDiv(registerId);
+    hideDiv(logoutId);
+}
+
 
 function showDiv(classname) {
     $(classname).show();
@@ -14,20 +42,24 @@ function hideDiv(classname) {
     $(classname).hide();
 }
 
+function hideModal(classname) {
+    $(classname).modal('hide');
+}
+
 function _addNewUser(email, password, firstname, lastname) {
 
-    showDiv('.loading.style-2');
+    showDiv(loadingCss);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         console.log("status code here is ", this.status, this.readyState);
         if (this.readyState == 4 && this.status == 200) {
             let data = JSON.parse(this.responseText);
-            console.log(JSON.stringify(data, null, 10));
-            hideDiv('.loading.style-2');
-
+            hideDiv(loadingCss);
+            hideModal(registerModalId);
+            loggedInUser(data);
             //do anything with success response
         } else if(this.readyState == 4) {
-            hideDiv('.loading.style-2');
+            hideDiv(loadingCss);
             //show proper error response to user
         }
     };
@@ -46,18 +78,18 @@ function _addNewUser(email, password, firstname, lastname) {
 
 function _loginUser(email, password) {
 
-    showDiv('.loading.style-2');
+    showDiv(loadingCss);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         console.log("status code here is ", this.status, this.readyState);
         if (this.readyState == 4 && this.status == 200) {
             let data = JSON.parse(this.responseText);
-            console.log(JSON.stringify(data, null, 10));
-            hideDiv('.loading.style-2');
-            hideDiv('#myModal2');
+            hideDiv(loadingCss);
+            hideModal(loginModalId);
+            loggedInUser(data);
             //do anything with success response
         } else if(this.readyState == 4) {
-            hideDiv('.loading.style-2');
+            hideDiv(loadingCss);
             //show proper error response to user
         }
     };
@@ -73,8 +105,7 @@ function _loginUser(email, password) {
     xhttp.open("GET",host+`/login-user?email=${email}&password=${password}`, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
-    //xhttp.send(JSON.stringify(payload));
-
+    xhttp.send();
 }
 
 function _constructNewUserPayload(inputEmail, inputPws, firstname, lastname) {
@@ -92,12 +123,38 @@ function _constructNewUserPayload(inputEmail, inputPws, firstname, lastname) {
     return data;
 }
 
+function loggedInUser(data) {
+    //Set IdentityId 
+    setCookie(identityIdStr, data.identity_id, 1);
 
-function setArrayAndLength(id, array) {
-    document.getElementById(id).innerHTML = array.join("\n");
-    let element = document.getElementById(id).previousElementSibling;
-    let value = element.innerHTML;
-    value = value.split(":");
-    value = value[0];
-    element.innerHTML = `${value} : (${array.length})`;
+    //Remove login and register icons
+    hideDiv(loginId);
+    hideDiv(registerId);
+    showDiv(logoutId);
+    console.log("loggedin user");
+}
+
+function setCookie(name, value, days) {
+	var expires = "";
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+		expires = "; expires=" + date.toUTCString();
+	}
+	document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+function getCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for (var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	document.cookie = name + '=; Max-Age=-99999999;';
 }

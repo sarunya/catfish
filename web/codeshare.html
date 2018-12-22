@@ -102,10 +102,22 @@
 		<div class="container" style="width:100%;padding-top: 2px">
 			<div class="col-md-12">
 				<div class="business">
-					<button style="background-color: #ff3c41; color: white; font-size: 1.0em; height: 40px; font-weight: bold" onclick="loadFirebase(true)">NEW
+					<button style="background-color: #ff3c41; color: white; font-size: 1.0em; height: 40px; font-weight: bold; margin-left: 2.5%" onclick="loadFirebase(true)">NEW
 						DOCUMENT</button>
-					<div class="comment">
-						<h3>Share your code here <a id="link" target="_blank" href="tinyurl.com/api-create.php?url=" style="font-size: 15px">(Get
+					<button style="background-color: #ff3c41; color: white; font-size: 1.0em; height: 40px; font-weight: bold; margin-left: 5%; display: none" id="saveDocument" data-toggle="modal" data-target="#saveDocModal">SAVE DOCUMENT</button>
+
+					<button style="background-color: #ff3c41; color: white; font-size: 1.0em; height: 40px; font-weight: bold; margin-left: 5%; display: none" id="loadDocument" data-toggle="modal" data-target="#saveDocModal" onclick="loadDocument()">LOAD DOCUMENT</button>
+					<button style="font-size: 1.0em; height: 40px; font-weight: bold; border: none; margin-left: 5%; display: none;" id="savedDocumentsBtn">
+						<select class="company" id="savedDocuments">
+							  <!-- <option style="color: white; font-size: 1.0em; height: 40px; font-weight: bold; margin-left: 5%;" value=''><strong>Document Name</strong></option>
+							  <option value="Company A">Company A</option>
+							  <option value="Company B">Company B</option> -->
+						</select>
+					</button>
+
+					
+					<div class="comment" >
+						<h3 style="margin-left: 2.5%">Share your code here <a id="link" target="_blank" href="tinyurl.com/api-create.php?url=" style="font-size: 15px">(Get
 								short link)</a></h3>
 						<div class="comment-bottom">
 							<form action="#" method="post">
@@ -120,6 +132,49 @@
 			<!-- technology-right -->
 
 			<div class="clearfix"></div>
+		</div>
+	</div>
+
+
+	<div class="container pb-modalreglog-container">
+		<div class="row">
+			<div class="col-xs-12 col-md-4 col-md-offset-4">
+				<div class="modal fade" id="saveDocModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Save Document Form</h4>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="form-group">
+										<label for="email">Document Name</label>
+										<div class="input-group pb-modalreglog-input-group">
+											<input type="email" class="form-control" id="docName" placeholder="Document Name">
+											<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="password">Guest Password</label>
+										<div class="input-group pb-modalreglog-input-group">
+											<input type="password" class="form-control" id="guestpws" placeholder="Guest Password">
+											<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" onclick="saveDocument(true)" style="background-color: #ff3c41">Save</button>
+							</div>
+						</div>
+					</div>
+					<div id="loading" class="loading style-2" style="display: none;"><div class="loading-wheel"></div></div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -246,112 +301,7 @@
 			$('.powered-by-firepad').remove()
 		}, 3000);
 	</script>
-	<script>
-		function init(newDocument) {
-			//// Initialize Firebase.
-			//// TODO: replace with your Firebase project configuration.
-			var config = {
-				apiKey: "AIzaSyC_JdByNm-E1CAJUkePsr-YJZl7W77oL3g",
-				authDomain: "firepad-tests.firebaseapp.com",
-				databaseURL: "https://firepad-tests.firebaseio.com"
-			};
-			firebase.initializeApp(config);
-			//// Get Firebase Database reference.
-			loadFirebase(newDocument);
-
-		}
-
-		function loadFirebase(newDocument) {
-			var firepadRef = getExampleRef(newDocument);
-
-		}
-
-		// Helper to get hash from end of URL or generate a random one.
-		function getExampleRef(newDocument = false) {
-			var ref = firebase.database().ref();
-			var visitorId = getVisitorId();
-
-			var xhttp1 = new XMLHttpRequest();
-			xhttp1.onreadystatechange = function () {
-				var hash = window.location.hash.replace(/#/g, '');
-				if (this.readyState == 4 && this.status == 200) {
-					hash = (hash.trim().length > 0) ? hash : this.responseText;
-
-					if (!newDocument && hash.length > 0) {
-						ref = ref.child(hash);
-						window.location = window.location.origin + window.location.pathname + '#' + ref.key; // add it as a hash to the URL.
-						hash = ref.key;
-					} else {
-						ref = ref.push(); // generate unique location.
-						window.location = window.location.origin + window.location.pathname + '#' + ref.key; // add it as a hash to the URL.
-						hash = ref.key;
-					}
-					if (typeof console !== 'undefined') {
-						console.log('Firebase data: ', ref.toString());
-					}
-					let url = window.location.origin + '/get-tiny-url?url=' + encodeURIComponent(window.location.href);
-					$("#link").attr("href", url);
-					updateCodeShareForVisitor(visitorId, hash);
-
-
-					var firepadRef = ref;
-					//// Create CodeMirror (with line numbers and the JavaScript mode).
-					var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
-						lineNumbers: true,
-						mode: 'javascript'
-					});
-					//// Create Firepad.
-					var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-						defaultText: 'Put your code here'
-					});
-					if(newDocument) {
-						document.location.reload() ;
-					}
-					return ref;
-				};
-
-			}
-			let host = window.location.origin;
-			if (host.startsWith("file")) {
-				host = "http://localhost:1337";
-			}
-			xhttp1.open("POST", host + '/get-code-map', true);
-			xhttp1.setRequestHeader("Content-type", "application/json");
-			xhttp1.setRequestHeader('Access-Control-Allow-Origin', '*');
-			xhttp1.send(JSON.stringify({
-				visitor_id: visitorId
-			}));
-		}
-
-		function getVisitorId() {
-			var req = new XMLHttpRequest();
-			req.open('GET', window.location.href, false);
-			req.send(null);
-			var headers = req.getAllResponseHeaders().toLowerCase();
-			return req.getResponseHeader("visitor_id");
-		}
-
-		function updateCodeShareForVisitor(visitorId, hash) {
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function () {
-				if (this.readyState == 4 && this.status == 200) {
-					console.log(this.responseText);
-				}
-			};
-
-			let host = window.location.origin;
-			if (host.startsWith("file")) {
-				host = "http://localhost:1337";
-			}
-			xhttp.open("POST", host + '/visitor-map', true);
-			xhttp.setRequestHeader("Content-type", "application/json");
-			xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
-			xhttp.send(JSON.stringify({
-				visitor_id: visitorId,
-				hash: hash
-			}));
-		}
-	</script>
+    <script type="text/javascript" src="./js/codeshare.js"></script>
 
 	<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 

@@ -58,8 +58,9 @@
 						
 						<ul class="nav navbar-nav">
 							<li class="active" ><a href="index.html">Home</a></li>
-							<li class="active" style="margin-left:20px;" ><a data-toggle="modal" data-target="#myModal" style="cursor: pointer">login</a></li>
-							<li class="active" style="margin-left:20px;"><a data-toggle="modal" data-target="#myModal2" style="cursor: pointer">register</a></li>
+							<li class="active" style="margin-left:20px;" id="loginBtn"><a data-toggle="modal" data-target="#myModal" style="cursor: pointer">login</a></li>
+							<li class="active" style="margin-left:20px;display: none" id="logoutBtn"><a data-toggle="modal" style="cursor: pointer" onclick="logoutUser()">logout</a></li>
+							<li class="active" style="margin-left:20px;" id="registerBtn"><a data-toggle="modal" data-target="#myModal2" style="cursor: pointer">register</a></li>
 						</ul>
 					</div>
 				</div>
@@ -182,12 +183,12 @@
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
-								<h4 class="modal-title" id="myModalLabel">Login form</h4>
+								<h4 class="modal-title" id="myModalLabel">Login Form</h4>
 							</div>
 							<div class="modal-body">
 								<form>
 									<div class="form-group">
-										<label for="email">Email address</label>
+										<label for="email">Email Address</label>
 										<div class="input-group pb-modalreglog-input-group">
 											<input type="email" class="form-control" id="email" placeholder="Email">
 											<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
@@ -204,10 +205,11 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Log in</button>
+								<button type="button" class="btn btn-primary" onclick="loginUser()" style="background-color: #ff3c41">Log in</button>
 							</div>
 						</div>
 					</div>
+					<div id="loading" class="loading style-2" style="display: none;"><div class="loading-wheel"></div></div>
 				</div>
 				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-sm" role="document">
@@ -216,7 +218,7 @@
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
-								<h4 class="modal-title" id="myModalLabel">Registration form</h4>
+								<h4 class="modal-title" id="myModalLabel">Registration Form</h4>
 							</div>
 							<div class="modal-body">
 								<form class="pb-modalreglog-form-reg">
@@ -238,7 +240,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="email">Email address</label>
+										<label for="email">Email Address</label>
 										<div class="input-group pb-modalreglog-input-group">
 											<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
 											<input type="email" class="form-control" id="inputEmail" placeholder="Email">
@@ -255,7 +257,7 @@
 							</div>
 							<div class="modal-footer" style="padding-left: 50%">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" id="signup" onclick="addNewUser()">Sign up</button>
+								<button type="button" class="btn btn-primary" id="signup" onclick="addNewUser()" style="background-color: #ff3c41">Sign up</button>
 							</div>
 						</div>
 					</div>

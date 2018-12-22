@@ -77,7 +77,15 @@ function start() {
   })
 
   app.get('/login-user', (req, res) => {
-    return userRouteHandler.addNewUser(req, res);
+    return userRouteHandler.login(req, res);
+  })
+
+  app.put('/save-codeshare', (req, res) => {
+    return userRouteHandler.addNewCodeShareRecord(req, res);
+  })
+
+  app.get('/saved-codeshare', (req, res) => {
+    return userRouteHandler.getSavedCodeShare(req, res);
   })
 
   app.use(express.static(path.join(__dirname, 'web')));

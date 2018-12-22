@@ -1,3 +1,3 @@
 SELECT id, data, created_date, modified_date
-FROM user_info
+FROM codeshare_data
 WHERE (data->>'firebase_id' = $1);
