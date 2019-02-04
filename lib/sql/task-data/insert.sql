@@ -1,0 +1,1 @@
+INSERT INTO task_data (id, data, created_date, modified_date) VALUES ($1, $2, now(), now()) returning data;

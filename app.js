@@ -10,7 +10,8 @@ guid = require('uuid'),
 db = require('./lib/data-access/pgp').db,
 TinyUrlRouteHandler = require('./lib/route-handler/tiny-url-route-handler'),
 VisitorMapHandler = require('./lib/route-handler/visitor-map-handler'),
-UserRouteHandler = require('./lib/route-handler/user-route-handler');
+UserRouteHandler = require('./lib/route-handler/user-route-handler'),
+TaskRouteHandler = require('./lib/route-handler/task-route-handler');
 
 function start() {
   let cwd = process.cwd();
@@ -30,6 +31,7 @@ function start() {
   let tinyUrlRouteHandler = new TinyUrlRouteHandler(dependencies);
   let visitorMapHandler = new VisitorMapHandler(dependencies);
   let userRouteHandler = new UserRouteHandler(dependencies);
+  let taskRouteHandler = new TaskRouteHandler(dependencies);
   
   app.use(express.json())
   
@@ -86,6 +88,14 @@ function start() {
 
   app.get('/saved-codeshare', (req, res) => {
     return userRouteHandler.getSavedCodeShare(req, res);
+  })
+
+  app.put('/save-task', (req, res) => {
+    return taskRouteHandler.saveOrUpdateTask(req, res);
+  })
+
+  app.get('/saved-tasks', (req, res) => {
+    return taskRouteHandler.getTasksForIdentityId(req, res);
   })
 
   app.use(express.static(path.join(__dirname, 'web')));
