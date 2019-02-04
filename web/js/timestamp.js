@@ -1,8 +1,6 @@
 function timestampToDate() {
     let input = readInput("timestamp");
-    console.log(input);
     let result = convertToHumanDate(input);
-    console.log(result);
     writeOutput(".top", result);
 }
 
@@ -23,7 +21,7 @@ function writeOutput(div, result) {
 }
 
 function convertToHumanDate(val) {
-    let date = new Date(parseInt(val)*1000);
+    let date = new Date(parseInt(val));
     return [date.toISOString(), date.toString()];
 }
 
