@@ -21,7 +21,7 @@ function writeOutput(div, result) {
 }
 
 function convertToHumanDate(val) {
-    let date = new Date(parseInt(val));
+    let date = new Date(parseInt(val)*1000);
     return [date.toISOString(), date.toString()];
 }
 
