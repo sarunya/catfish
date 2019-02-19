@@ -96,6 +96,7 @@
         }
         #main div.left {
             width: 45%;
+			height: 90%;
             display: inline-block;
         }
     
@@ -115,6 +116,16 @@
             text-align: left;
             margin-top: 0%;
             margin-left: 40%;
+        }
+
+		#main div.top#share {
+            width: 14%;
+            display: inline-block;
+            vertical-align: top;
+            text-align: left;
+            margin-top: 0%;
+            margin-left: 40%;
+			position: relative;
         }
     
         #main div.right {
@@ -148,7 +159,7 @@
     
         #main textarea {
             width: 100%;
-            min-height: 500px;
+            min-height: 440px;
             padding: 5px;
 			background: #eee;
 			border-color: #41c7f8;
@@ -207,7 +218,7 @@
             margin-left: 50%;
 		}
 
-		button#New_Diff {
+		button#New_Diff, button#share {
             font-size: 1.2em;
 			color: #fff;
 			background-color: #ff3c41;
@@ -219,6 +230,10 @@
 			width: 150px;
 			height: 40px;
 			margin-left: 5%
+        }
+
+		button#share {
+			margin-left: 47.5%
         }
     
     </style>
@@ -287,11 +302,13 @@
             <div class="center">
                 <button id="compare" onclick="compareAndPopualateResult()">COMPARE</button>
                 <div class="throbber-loader"></div>
-            </div>
+			</div>
+			
         </div>
 		<div class="centerpos" style="display: none;">
 			<div class="top">
                 <button id="New_Diff" onclick="newDiff()">NEW DIFF</button>
+                <button id="share" onclick="share()">SHARE</button>
                 <div class="throbber-loader"></div>
             </div><br><br><br>
             <pre class="codeblock left" id="left">${diff[0]}</pre>

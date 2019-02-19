@@ -32,6 +32,8 @@ let extraColor = "#5ABB6A";
 let resetColor = "none";
 let lineBreak = "<code></code></br>";
 let space = "&nbsp;";
+let overallActualJson = null;
+let overallExpectedJson = null;
 
 function _isObject(a) {
     return (!!a) && (a.constructor === Object);
@@ -78,7 +80,6 @@ function replaceHtmlStrings(str) {
     }
     return str;
 }
-
 
 function _prettyJson(json, indentation, color, comma="") {
     const me = this;
@@ -414,10 +415,11 @@ function hideDiv(classname) {
     $(classname).hide();
 }
 
-
 function compareAndPopualateResult() {
     let actual = $('#textarealeft').val();
-    let expected = $('#textarearight').val();
+    let expected = $('#textarearight').val(); 
+    overallActualJson = actual;
+    overallExpectedJson = expected;
     let diff = compare(actual, expected);
 
     $('#left').html(diff[0]);
@@ -431,6 +433,98 @@ function newDiff() {
     hideDiv(".centerpos");
     showDiv(".initContainer");
 }
+
+function share() {
+    let actual = $('#textarealeft').val();
+    let expected = $('#textarearight').val();
+    actual = JSON.parse(actual);
+    expected = JSON.parse(expected);
+
+    //store in backend and get a short id url
+    createJsonShare(actual, expected);
+}
+
+
+
+// Helper to get hash from end of URL or generate a random one.
+function getExampleRef(newDocument = false) {
+    var ref = firebase.database().ref();
+    var visitorId = getVisitorId();
+
+    var xhttp1 = new XMLHttpRequest();
+    xhttp1.onreadystatechange = function () {
+        var hash = window.location.hash.replace(/#/g, '');
+        if (this.readyState == 4 && this.status == 200) {
+            hash = (hash.trim().length > 0) ? hash : this.responseText;
+
+            if (!newDocument && hash.length > 0) {
+                ref = ref.child(hash);
+                window.location = window.location.origin + window.location.pathname + '#' + ref.key; // add it as a hash to the URL.
+                hash = ref.key;
+            } else {
+                ref = ref.push(); // generate unique location.
+                window.location = window.location.origin + window.location.pathname + '#' + ref.key; // add it as a hash to the URL.
+                hash = ref.key;
+            }
+            if (typeof console !== 'undefined') {
+                console.log('Firebase data: ', ref.toString());
+            }
+            let url = window.location.origin + '/get-tiny-url?url=' + encodeURIComponent(window.location.href);
+            $("#link").attr("href", url);
+            updateCodeShareForVisitor(visitorId, hash);
+
+
+            var firepadRef = ref;
+            //// Create CodeMirror (with line numbers and the JavaScript mode).
+            var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
+                lineNumbers: true,
+                mode: 'javascript'
+            });
+            //// Create Firepad.
+            var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
+                defaultText: 'Put your code here'
+            });
+            if(newDocument) {
+                document.location.reload() ;
+            }
+            return ref;
+        };
+
+    }
+    let host = window.location.origin;
+    if (host.startsWith("file")) {
+        host = "http://localhost:1337";
+    }
+    xhttp1.open("POST", host + '/get-code-map', true);
+    xhttp1.setRequestHeader("Content-type", "application/json");
+    xhttp1.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xhttp1.send(JSON.stringify({
+        visitor_id: visitorId
+    }));
+}
+
+function createJsonShare(actual, expected) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+    };
+
+    let host = window.location.origin;
+    if (host.startsWith("file")) {
+        host = "http://localhost:1337";
+    }
+    xhttp.open("POST", host + '/json-share', true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xhttp.send(JSON.stringify({
+        actual: actual,
+        expected: expected
+    }));
+}
+
+
 
 // $(document).keydown(function (event) {
 //     if (event.keyCode === 78 || event.keyCode === 39) {

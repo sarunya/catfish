@@ -51,6 +51,9 @@ function start() {
   app.post('/array-companison', (req, res) => {
     return comparisonRouteHandler.arrayComparison(req, res)
   })
+  app.post('/json-share', (req, res) => {
+    return 
+  })
   app.use(express.static(path.join(__dirname, 'web')));
   var port = process.env.PORT || 1337;
   app.listen(port);
