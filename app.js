@@ -9,18 +9,17 @@ const db = require('./lib/data-access/pgp').db;
 const TinyUrlRouteHandler = require('./lib/route-handler/tiny-url-route-handler');
 const ComparisonRouteHandler = require('./lib/route-handler/comparison-route-handler');
 const VisitorMapHandler = require('./lib/route-handler/visitor-map-handler');
+const defaultConfig = require('./config/local-config.json');
 
 function start() {
   let cwd = process.cwd();
   let dependencies = {};
 
-  nconf.env().argv();
-  if (nconf.get('config')) {
-    console.log(path.join(cwd, nconf.get('config')));
-    dependencies.config = require(path.join(cwd, nconf.get('config')));
-  } else {
-    console.log("Config not found");
-    process.exit();
+  //nconf.env().argv();
+  dependencies.config = defaultConfig;
+  if (process.env.DATABASE_URL) {
+    //console.log(path.join(cwd, nconf.get('config')));
+    defaultConfig.postgres.connection_string_catfish = process.env.DATABASE_URL;
   }
   dependencies.pgpCatFish = db(dependencies.config.postgres.connection_string_catfish, dependencies.config.postgres.poolSize);
 
