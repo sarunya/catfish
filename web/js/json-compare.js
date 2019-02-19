@@ -67,21 +67,21 @@ function _findNoOfLeadingSpaces(str) {
     return str.match(pttrn)[0].length;
 }
 
-function _replaceAll (str, pattern, replace) {
+function _replaceAll(str, pattern, replace) {
     return str.replace(new RegExp(pattern, 'g'), replace);
 }
 
 function replaceHtmlStrings(str) {
-    if(str) {
-        str = _replaceAll(str, "\\\\","\\");
-        str = _replaceAll(str, "&",";&amp;");
-        str = _replaceAll(str, "<","&lt;");
-        str = _replaceAll(str, ">","&gt;");
+    if (str) {
+        str = _replaceAll(str, "\\\\", "\\");
+        str = _replaceAll(str, "&", ";&amp;");
+        str = _replaceAll(str, "<", "&lt;");
+        str = _replaceAll(str, ">", "&gt;");
     }
     return str;
 }
 
-function _prettyJson(json, indentation, color, comma="") {
+function _prettyJson(json, indentation, color, comma = "") {
     const me = this;
     let linesInJson = 1;
     let jsonStr = JSON.stringify(json, null, indentation);
@@ -92,15 +92,15 @@ function _prettyJson(json, indentation, color, comma="") {
         let index = 1;
         for (index = 1; index < jsonStrArr.length - 1; index++) {
             let leadingSpace = _findNoOfLeadingSpaces(jsonStrArr[index]);
-            leadingSpace = (leadingSpace/10) - 1;
+            leadingSpace = (leadingSpace / 10) - 1;
             leadingSpace = indentation + (4 * leadingSpace);
             jsonStr += `<div  style="background-color: ${color}"><code>${space.repeat(leadingSpace)}${jsonStrArr[index].trim()}</code><br/></div>`;
             ++linesInJson
         }
-        jsonStr += `<div  style="background-color: ${color}"><code>${space.repeat(indentation-4)}` + jsonStrArr[index] + comma+"</code></div>";
+        jsonStr += `<div  style="background-color: ${color}"><code>${space.repeat(indentation-4)}` + jsonStrArr[index] + comma + "</code></div>";
         ++linesInJson;
     } else {
-        jsonStr = jsonStr+comma;
+        jsonStr = jsonStr + comma;
     }
     return [jsonStr, linesInJson];
 }
@@ -164,15 +164,15 @@ function compareTwoJsonObject(actual, expected, indentation) {
                 acomma = "";
             }
         }
-        if ((aVal != null && eVal != null  && typeof aVal == typeof eVal) || (aVal == null && eVal == null)){
+        if ((aVal != null && eVal != null && typeof aVal == typeof eVal) || (aVal == null && eVal == null)) {
             if (_isJSON(aVal) && _isJSON(eVal)) {
                 let diff = compareTwoJsonObject(aVal, eVal, indentation + 4);
                 acutalJsonString += `<code style="background-color: ${resetColor}" >${space.repeat(indentation)}${eKey} : ${diff[0]}${acomma}</code><br/>`;
                 expectedJsonString += `<code style="background-color: ${resetColor}" >${space.repeat(indentation)}${eKey} : ${diff[1]}${ecomma}</code><br/>`;
             } else if (_isArray(aVal) && _isArray(eVal)) {
                 let diff = compareArray(aVal, eVal, eKey, indentation);
-                acutalJsonString+=diff[0];
-                expectedJsonString+=diff[1];
+                acutalJsonString += diff[0];
+                expectedJsonString += diff[1];
             } else {
                 if (aVal != eVal) {
                     acolor = wrongColor;
@@ -189,7 +189,7 @@ function compareTwoJsonObject(actual, expected, indentation) {
             let prettyVal = _prettyJson(eVal, indentation + 4, ecolor, ecomma);
             acutalJsonString += lineBreak.repeat(prettyVal[1]);
             expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}</code></div>`;
-        }  else if (typeof expected[eKey] == "undefined" || eVal == null) {
+        } else if (typeof expected[eKey] == "undefined" || eVal == null) {
             acolor = extraColor
             let prettyVal = _prettyJson(aVal, indentation + 4, acolor, acomma);
             expectedJsonString += lineBreak.repeat(prettyVal[1]);
@@ -239,8 +239,8 @@ function compareArray(aVal, eVal, eKey, indentation) {
     let expectedJsonString = "";
     let acomma = "";
     let ecomma = "";
-    if(eKey) {
-        eKey = space.repeat(indentation)+eKey+":"; 
+    if (eKey) {
+        eKey = space.repeat(indentation) + eKey + ":";
     } else {
         eKey = "";
     }
@@ -313,25 +313,25 @@ function compareArray(aVal, eVal, eKey, indentation) {
             }
             let diff = (aAlone.length > eAlone.length) ? (aAlone.length - eAlone.length) : eAlone.length - aAlone.length;
             let isaHigher = (aAlone.length > eAlone.length) ? true : false;
-            let min = (aAlone.length > eAlone.length) ? eAlone.length: aAlone.length;
+            let min = (aAlone.length > eAlone.length) ? eAlone.length : aAlone.length;
             for (let j = 0; j < aAlone.length; j++) {
                 let aOnly = aAlone[j];
-                if(min > j) {
+                if (min > j) {
                     acolor = wrongColor;
                 } else {
                     acolor = extraColor;
                 }
-                acomma = (j==aAlone.length-1)?"":acomma;
+                acomma = (j == aAlone.length - 1) ? "" : acomma;
                 acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation+4)}${_prettyJson(aOnly, indentation+4, wrongColor)[0]}${acomma}</code><br/></div>`;
             }
             for (let j = 0; j < eAlone.length; j++) {
                 let eOnly = eAlone[j];
-                if(min > j) {
+                if (min > j) {
                     ecolor = wrongColor;
                 } else {
                     ecolor = extraColor;
                 }
-                ecomma = (j==eAlone.length-1)?"":ecomma;
+                ecomma = (j == eAlone.length - 1) ? "" : ecomma;
                 expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation+4)}${_prettyJson(eOnly, indentation+4, wrongColor)[0]}${ecomma}</code><br/></div>`;
             }
             if (isaHigher) {
@@ -355,39 +355,39 @@ function compareArray(aVal, eVal, eKey, indentation) {
         acolor = wrongColor;
         acomma = ",";
         ecomma = ",";
-        let adiff, ediff ;
-        let max = (aVal.length>eVal.length)?aVal.length:eVal.length;
+        let adiff, ediff;
+        let max = (aVal.length > eVal.length) ? aVal.length : eVal.length;
         expectedJsonString += `<div  style="background-color: ${resetColor}"><code>${eKey}[</code><br/></div>`;
         acutalJsonString += `<div  style="background-color: ${resetColor}"><code>${eKey}[</code><br/></div>`;
-        indentation = indentation+4;
-        for(let j=0;j<max;j++) {
-            acolor = (j==eVal.length)?extraColor:acolor;
-            ecolor = (j==aVal.length)?extraColor:ecolor;
-            acomma = (j==aVal.length-1)?"": acomma;
-            ecomma = (j==eVal.length-1)?"": ecomma;
-            if(j<aVal.length) {
-                adiff = _prettyJson(aVal[j], indentation+4, acolor, acomma);
+        indentation = indentation + 4;
+        for (let j = 0; j < max; j++) {
+            acolor = (j == eVal.length) ? extraColor : acolor;
+            ecolor = (j == aVal.length) ? extraColor : ecolor;
+            acomma = (j == aVal.length - 1) ? "" : acomma;
+            ecomma = (j == eVal.length - 1) ? "" : ecomma;
+            if (j < aVal.length) {
+                adiff = _prettyJson(aVal[j], indentation + 4, acolor, acomma);
                 acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey}${adiff[0]}</code></div>`;
                 adiff = adiff[1];
-            }else {
+            } else {
                 adiff = 0;
             }
 
-            if(j<eVal.length) {
-                ediff = _prettyJson(eVal[j], indentation+4, ecolor, ecomma);
+            if (j < eVal.length) {
+                ediff = _prettyJson(eVal[j], indentation + 4, ecolor, ecomma);
                 expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey}${ediff[0]}</code></div>`;
                 ediff = ediff[1];
-            }else {
+            } else {
                 ediff = 0;
             }
 
-            if(adiff > ediff) {
+            if (adiff > ediff) {
                 expectedJsonString += lineBreak.repeat(adiff - ediff);
-            } else if(adiff < ediff) {
+            } else if (adiff < ediff) {
                 acutalJsonString += lineBreak.repeat(ediff - adiff);
             }
         }
-        indentation = indentation-4;
+        indentation = indentation - 4;
         acutalJsonString += `<code style="background-color: ${resetColor}" >${space.repeat(indentation)}]${acomma}</code><br/>`;
         expectedJsonString += `<code style="background-color: ${resetColor}" >${space.repeat(indentation)}]${ecomma}</code><br/>`;
     }
@@ -395,11 +395,10 @@ function compareArray(aVal, eVal, eKey, indentation) {
 }
 
 function compare(actual, expected, indentation) {
-    console.log(actual, expected, typeof actual);
     let data = [];
-    if(_isJSON(actual)) {
+    if (_isJSON(actual)) {
         data = compareTwoJsonObject(actual, expected, 4);
-    } else if(_isArray(actual) && _isArray(expected)) {
+    } else if (_isArray(actual) && _isArray(expected)) {
         data = compareArray(actual, expected, null, 0);
     }
     return data;
@@ -415,15 +414,15 @@ function hideDiv(classname) {
 
 function compareAndPopualateResult() {
     let actual = $('#textarealeft').val();
-    let expected = $('#textarearight').val(); 
+    let expected = $('#textarearight').val();
     actual = JSON.parse(actual);
     expected = JSON.parse(expected);
     _compareAndPopualateResult(actual, expected);
+    showShare();
 }
 
 function _compareAndPopualateResult(actual, expected) {
     let diff = compare(actual, expected);
-
     $('#left').html(diff[0]);
     $('#right').html(diff[1]);
     showDiv(".centerpos");
@@ -432,7 +431,9 @@ function _compareAndPopualateResult(actual, expected) {
 
 function newDiff() {
     hideDiv(".centerpos");
-    showDiv(".initContainer");
+    showDiv(".initContainer");    
+    window.history.pushState("object or string", "Title", window.location.pathname);
+    hideLoading();
 }
 
 function share() {
@@ -445,18 +446,20 @@ function share() {
     createJsonShare(actual, expected);
 }
 
-
-
 // Helper to get hash from end of URL or generate a random one.
-function loadIfSaved(newDocument = false) {
-    let host = window.location.origin;
-    console.log(host, window.location.search);
-    getSavedJsonShareId(window.location.search);
+function loadIfSaved() {
+    let id = getSavedJsonShareId();
+    if (id) {
+        getJsonShareData(id);
+        hideShare();
+    } else {
+        showShare();
+    }
 }
 
-function getSavedJsonShareId(search) {
-    let id = getParameterByName("id", search);
-    getJsonShareData(id);
+function getSavedJsonShareId() {
+    let search = window.location.search;
+    return getParameterByName("id", search);
 }
 
 function getParameterByName(name, url) {
@@ -473,9 +476,10 @@ function createJsonShare(actual, expected) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("hiding");
-            $('#loading').hide();
-            console.log(this.responseText);
+            hideLoading();
+            let id = JSON.parse(this.responseText);
+            id = id.id;
+            prompt("share url: ", window.location.href + "?id=" + id);
         }
     };
 
@@ -491,17 +495,27 @@ function createJsonShare(actual, expected) {
         expected: expected
     }));
 
-	$('#loading').show();
+    showLoading();
+}
+
+function loadShareDataHtml(actual, expected) {
+    $('#textarealeft').val(JSON.stringify(actual, null, 10));
+    $('#textarearight').val(JSON.stringify(expected, null, 10));
+    _compareAndPopualateResult(actual, expected);
 }
 
 function getJsonShareData(jsonshareid) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText, typeof this.responseText);
-            let response = JSON.parse(this.responseText); 
-            _compareAndPopualateResult(response.actual, response.expected);
-            $('#loading').hide();
+            let response = JSON.parse(this.responseText);
+            if(response.error) {
+                alert("The Json Difference document you request is not found/expired");
+                window.location.href = window.location.origin+window.location.pathname;
+            } else {
+                loadShareDataHtml(response.actual, response.expected);
+            }
+            hideLoading();
         }
     };
 
@@ -509,13 +523,29 @@ function getJsonShareData(jsonshareid) {
     if (host.startsWith("file")) {
         host = "http://localhost:1337";
     }
-    xhttp.open("GET", host + '/json-share-data?id='+jsonshareid, true);
+    xhttp.open("GET", host + '/json-share-data?id=' + jsonshareid, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
     xhttp.send();
-	$('#loading').show();
+    showLoading();
 }
 
+
+function hideLoading() {
+    $(".se-pre-con").hide();
+}
+
+function showLoading() {
+    $(".se-pre-con").show();
+}
+
+function hideShare() {
+    $("#share").hide();
+}
+
+function showShare() {
+    $("#share").show();
+}
 
 
 // $(document).keydown(function (event) {

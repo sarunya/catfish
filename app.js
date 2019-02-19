@@ -60,11 +60,7 @@ function start() {
   })
 
   app.get('/json-comparison', (req, res) => {
-    if (req.query && req.query.id) {
-      comparisonRouteHandler.getJsonShareData(req, res);
-    } else {
       res.render('json-comparison.html');
-    }
   })
 
   app.get('/json-share-data', (req, res) => {
