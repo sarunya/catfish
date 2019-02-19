@@ -1,0 +1,7 @@
+{
+    "postgres": {
+        "connection_string_catfish": "postgres://vrvopdsirbssci:b7593b3fa4bc26f0ea30086f1256e1278e916f9fd44a3ee2596aee6ee7a4a3f3@ec2-184-72-239-186.compute-1.amazonaws.com:5432/dbjva279e3eboa",
+        "pool_size": 10
+    },
+    "hashSecret": "hashsecret"
+}

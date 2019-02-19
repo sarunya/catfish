@@ -395,9 +395,7 @@ function compareArray(aVal, eVal, eKey, indentation) {
 }
 
 function compare(actual, expected, indentation) {
-    const me = this;
-    actual = JSON.parse(actual);
-    expected = JSON.parse(expected);
+    console.log(actual, expected, typeof actual);
     let data = [];
     if(_isJSON(actual)) {
         data = compareTwoJsonObject(actual, expected, 4);
@@ -418,15 +416,18 @@ function hideDiv(classname) {
 function compareAndPopualateResult() {
     let actual = $('#textarealeft').val();
     let expected = $('#textarearight').val(); 
-    overallActualJson = actual;
-    overallExpectedJson = expected;
+    actual = JSON.parse(actual);
+    expected = JSON.parse(expected);
+    _compareAndPopualateResult(actual, expected);
+}
+
+function _compareAndPopualateResult(actual, expected) {
     let diff = compare(actual, expected);
 
     $('#left').html(diff[0]);
     $('#right').html(diff[1]);
     showDiv(".centerpos");
     hideDiv(".initContainer");
-
 }
 
 function newDiff() {
@@ -447,66 +448,33 @@ function share() {
 
 
 // Helper to get hash from end of URL or generate a random one.
-function getExampleRef(newDocument = false) {
-    var ref = firebase.database().ref();
-    var visitorId = getVisitorId();
-
-    var xhttp1 = new XMLHttpRequest();
-    xhttp1.onreadystatechange = function () {
-        var hash = window.location.hash.replace(/#/g, '');
-        if (this.readyState == 4 && this.status == 200) {
-            hash = (hash.trim().length > 0) ? hash : this.responseText;
-
-            if (!newDocument && hash.length > 0) {
-                ref = ref.child(hash);
-                window.location = window.location.origin + window.location.pathname + '#' + ref.key; // add it as a hash to the URL.
-                hash = ref.key;
-            } else {
-                ref = ref.push(); // generate unique location.
-                window.location = window.location.origin + window.location.pathname + '#' + ref.key; // add it as a hash to the URL.
-                hash = ref.key;
-            }
-            if (typeof console !== 'undefined') {
-                console.log('Firebase data: ', ref.toString());
-            }
-            let url = window.location.origin + '/get-tiny-url?url=' + encodeURIComponent(window.location.href);
-            $("#link").attr("href", url);
-            updateCodeShareForVisitor(visitorId, hash);
-
-
-            var firepadRef = ref;
-            //// Create CodeMirror (with line numbers and the JavaScript mode).
-            var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
-                lineNumbers: true,
-                mode: 'javascript'
-            });
-            //// Create Firepad.
-            var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-                defaultText: 'Put your code here'
-            });
-            if(newDocument) {
-                document.location.reload() ;
-            }
-            return ref;
-        };
-
-    }
+function loadIfSaved(newDocument = false) {
     let host = window.location.origin;
-    if (host.startsWith("file")) {
-        host = "http://localhost:1337";
-    }
-    xhttp1.open("POST", host + '/get-code-map', true);
-    xhttp1.setRequestHeader("Content-type", "application/json");
-    xhttp1.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xhttp1.send(JSON.stringify({
-        visitor_id: visitorId
-    }));
+    console.log(host, window.location.search);
+    getSavedJsonShareId(window.location.search);
+}
+
+function getSavedJsonShareId(search) {
+    let id = getParameterByName("id", search);
+    getJsonShareData(id);
+}
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
 function createJsonShare(actual, expected) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            console.log("hiding");
+            $('#loading').hide();
             console.log(this.responseText);
         }
     };
@@ -522,6 +490,30 @@ function createJsonShare(actual, expected) {
         actual: actual,
         expected: expected
     }));
+
+	$('#loading').show();
+}
+
+function getJsonShareData(jsonshareid) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText, typeof this.responseText);
+            let response = JSON.parse(this.responseText); 
+            _compareAndPopualateResult(response.actual, response.expected);
+            $('#loading').hide();
+        }
+    };
+
+    let host = window.location.origin;
+    if (host.startsWith("file")) {
+        host = "http://localhost:1337";
+    }
+    xhttp.open("GET", host + '/json-share-data?id='+jsonshareid, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xhttp.send();
+	$('#loading').show();
 }
 
 

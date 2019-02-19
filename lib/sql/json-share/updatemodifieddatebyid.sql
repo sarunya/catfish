@@ -1,0 +1,1 @@
+update json_share_info set modified_date=now() where id=$1 returning id;

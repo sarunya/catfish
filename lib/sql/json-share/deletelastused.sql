@@ -1,0 +1,1 @@
+delete from json_share_info where modified_date<=(select min(modified_date) from promotions);

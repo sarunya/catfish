@@ -1,0 +1,1 @@
+select count(*) from json_share_info;
