@@ -186,14 +186,28 @@ function compareTwoJsonObject(actual, expected, indentation) {
             }
         } else if (typeof actual[eKey] == "undefined" || aVal == null) {
             ecolor = extraColor
+            if(missingKeysInActual.indexOf(eKey)==-1) {
+                let prettAaVal = _prettyJson(aVal, indentation + 4, wrongColor, acomma);
+                let prettyVal = _prettyJson(eVal, indentation + 4, wrongColor, ecomma);
+                acutalJsonString += `<div  style="background-color: ${wrongColor}"><code>${space.repeat(indentation)}${eKey} : ${prettAaVal[0]}</code></div>`;;
+                expectedJsonString += `<div  style="background-color: ${wrongColor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}</code></div>`;
+            } else {
+                let prettyVal = _prettyJson(eVal, indentation + 4, ecolor, ecomma);
+                acutalJsonString += lineBreak.repeat(prettyVal[1]);
+                expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}</code></div>`;
+            }
+        } else if (typeof expected[eKey] == "undefined" || eVal == null) { //expected key is run through, so it will not be the missing key
+            acolor = wrongColor;
+            ecolor = wrongColor;
+            let prettAaVal = _prettyJson(aVal, indentation + 4, acolor, acomma);
             let prettyVal = _prettyJson(eVal, indentation + 4, ecolor, ecomma);
-            acutalJsonString += lineBreak.repeat(prettyVal[1]);
+            acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey} : ${prettAaVal[0]}</code></div>`;;
             expectedJsonString += `<div  style="background-color: ${ecolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}</code></div>`;
-        } else if (typeof expected[eKey] == "undefined" || eVal == null) {
-            acolor = extraColor
-            let prettyVal = _prettyJson(aVal, indentation + 4, acolor, acomma);
-            expectedJsonString += lineBreak.repeat(prettyVal[1]);
-            acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}</code></div>`;
+            // } else {
+            //     let prettyVal = _prettyJson(aVal, indentation + 4, acolor, acomma);
+            //     expectedJsonString += lineBreak.repeat(prettyVal[1]);
+            //     acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${eKey} : ${prettyVal[0]}</code></div>`;
+            // }
         } else {
             acolor = wrongColor;
             ecolor = wrongColor;
