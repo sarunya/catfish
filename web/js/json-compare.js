@@ -231,11 +231,9 @@ function compareTwoJsonObject(actual, expected, indentation) {
         let aKey = extraKeysInActual[i];
         let aKeyString = `"${aKey}"`;
         acolor = extraColor
+        acomma = (i+1==extraKeysInActual.length)?"":acomma;
         let prettyVal = _prettyJson(actual[aKey], indentation + 4, acolor, acomma);
         expectedJsonString += lineBreak.repeat(prettyVal[1]);
-        if (extraKeysInActual.indexOf(aKey) == extraKeysInActual.length - 1) {
-            acomma = "";
-        }
         acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${aKeyString} : ${prettyVal[0]}</code></div>`;
     }
 
