@@ -146,7 +146,8 @@ function compareTwoJsonObject(actual, expected, indentation) {
     let ecolor = resetColor;
     let acutalJsonString = `<code style="background-color: ${acolor}" >{</code><br/>`;
     let expectedJsonString = `<code style="background-color: ${ecolor}" >{</code><br/>`;
-    let missingKeysInActual = _difference(actualKeys, expectedKeys);
+    let extraKeysInActual = _difference(actualKeys, expectedKeys);
+    let notFoundKeysInActual = _difference(expectedKeys, actualKeys);
     let acomma = ",";
     let ecomma = ",";
     if (initindentation) {
@@ -160,11 +161,11 @@ function compareTwoJsonObject(actual, expected, indentation) {
         let eVal = expected[eKey];
         if (expectedKeys.indexOf(eKey) == expectedKeys.length - 1) {
             ecomma = "";
-            if (missingKeysInActual.length == 0) {
+            if (extraKeysInActual.length == 0) {
                 acomma = "";
             }
         }
-        if ((aVal != null && eVal != null && typeof aVal == typeof eVal) || (aVal == null && eVal == null)) {
+        if ((aVal != null && eVal != null && typeof aVal == typeof eVal) || (aVal == null && eVal == null) && notFoundKeysInActual.indexOf(eKey)<0) {
             if (_isJSON(aVal) && _isJSON(eVal)) {
                 let diff = compareTwoJsonObject(aVal, eVal, indentation + 4);
                 acutalJsonString += `<code style="background-color: ${resetColor}" >${space.repeat(indentation)}${eKey} : ${diff[0]}${acomma}</code><br/>`;
@@ -186,7 +187,7 @@ function compareTwoJsonObject(actual, expected, indentation) {
             }
         } else if (typeof actual[eKey] == "undefined" || aVal == null) {
             ecolor = extraColor
-            if(missingKeysInActual.indexOf(eKey)==-1) {
+            if(notFoundKeysInActual.indexOf(eKey)==-1) {
                 let prettAaVal = _prettyJson(aVal, indentation + 4, wrongColor, acomma);
                 let prettyVal = _prettyJson(eVal, indentation + 4, wrongColor, ecomma);
                 acutalJsonString += `<div  style="background-color: ${wrongColor}"><code>${space.repeat(indentation)}${eKey} : ${prettAaVal[0]}</code></div>`;;
@@ -225,12 +226,12 @@ function compareTwoJsonObject(actual, expected, indentation) {
         }
     }
 
-    for (let i = 0; i < missingKeysInActual.length; i++) {
-        let aKey = missingKeysInActual[i];
+    for (let i = 0; i < extraKeysInActual.length; i++) {
+        let aKey = extraKeysInActual[i];
         acolor = extraColor
         let prettyVal = _prettyJson(actual[aKey], indentation + 4, acolor, acomma);
         expectedJsonString += lineBreak.repeat(prettyVal[1]);
-        if (missingKeysInActual.indexOf(aKey) == missingKeysInActual.length - 1) {
+        if (extraKeysInActual.indexOf(aKey) == extraKeysInActual.length - 1) {
             acomma = "";
         }
         acutalJsonString += `<div  style="background-color: ${acolor}"><code>${space.repeat(indentation)}${aKey} : ${prettyVal[0]}</code></div>`;
