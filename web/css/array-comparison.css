@@ -94,3 +94,21 @@ button {
 #checkboxdiv input {
     margin-right: 0.5%;
 }
+
+#checkboxdiv button {
+    margin-top: 0%;
+    width: 8%;
+    height: 30px;
+    font-size: 1.0em;
+}
+
+.se-pre-con {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgb(161, 172, 172);
+    opacity: 0.25;
+}

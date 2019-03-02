@@ -1,1 +1,1 @@
-INSERT INTO json_share_info (id, actual, expected, actualhash, expectedhash, created_date, modified_date) VALUES ($1, $2, $3, $4, $5, now(), now()) returning id;
+INSERT INTO json_share_info (id, actual, expected, actualhash, expectedhash, array_data, created_date, modified_date) VALUES ($1, $2, $3, $4, $5, $6, now(), now()) returning id;

@@ -502,6 +502,10 @@ function createJsonShare(actual, expected) {
             id = id.id;
             prompt("share url: ", window.location.href + "?id=" + id);
         }
+        else if (this.readyState == 4 && this.status != 200) {
+            hideLoading();
+            alert("Error in creating share. Please try again");
+        }
     };
 
     let host = window.location.origin;
@@ -538,6 +542,10 @@ function getJsonShareData(jsonshareid) {
             }
             hideLoading();
         }
+        else if (this.readyState == 4 && this.status != 200) {
+            hideLoading();
+            alert("Error in creating share. Please try again");
+        }
     };
 
     let host = window.location.origin;
@@ -567,18 +575,3 @@ function hideShare() {
 function showShare() {
     $("#share").show();
 }
-
-
-// $(document).keydown(function (event) {
-//     if (event.keyCode === 78 || event.keyCode === 39) {
-//         /*
-//          * The N key or right arrow key
-//          */
-//         //jdd.highlightNextDiff();
-//     } else if (event.keyCode === 80 || event.keyCode === 37) {
-//         /*
-//          * The P key or left arrow key
-//          */
-//         //jdd.highlightPrevDiff();
-//     }
-// });

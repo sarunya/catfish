@@ -13,3 +13,8 @@ WITH (
 );
 
 CREATE UNIQUE INDEX hash_index ON  json_share_info (actualhash, expectedhash);
+
+CREATE INDEX hash_array_index ON  json_share_info (actualhash, expectedhash, is_array);
+
+ALTER TABLE json_share_info
+  ADD COLUMN "array_data" jsonb DEFAULT NULL;

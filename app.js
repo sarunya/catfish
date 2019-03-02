@@ -59,11 +59,15 @@ function start() {
   })
 
   app.get('/json-comparison', (req, res) => {
-      res.render('json-comparison.html');
+    res.render('json-comparison.html');
   })
 
   app.get('/json-share-data', (req, res) => {
-      return comparisonRouteHandler.getJsonShareData(req, res);
+    return comparisonRouteHandler.getJsonShareData(req, res);
+  })
+
+  app.get('/array-share-data', (req, res) => {
+    return comparisonRouteHandler.getArrayShareData(req, res);
   })
 
   app.post('/visitor-map', (req, res) => {
@@ -80,6 +84,9 @@ function start() {
   })
   app.post('/json-share', (req, res) => {
     return comparisonRouteHandler.createJsonShare(req, res);
+  })
+  app.post('/array-share', (req, res) => {
+    return comparisonRouteHandler.createArrayShare(req, res);
   })
   app.use(express.static(path.join(__dirname, 'web')));
   var port = process.env.PORT || 1337;

@@ -36,7 +36,7 @@
     <script type="text/javascript" src="./js/array-compare.js"></script>
 </head>
 
-<body>
+<body onload="loadIfSaved()">
     <div class="top_header" id="home">
         <!-- Fixed navbar -->
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -88,6 +88,7 @@
             <input type="checkbox" name="types" value="spaces"> <label>spaces</label>
             <input type="checkbox" name="types" value="case"> <label>Case-insensitive</label>
             <input type="checkbox" name="types" value="duplicates"> <label>Remove duplicates</label>
+            <button id="share" onclick="share()">SHARE</button>
         </div>
         <div class="top">
             <div class="leftpane">
@@ -263,5 +264,5 @@
     <!-- //jQuery-Photo-filter-lightbox-Gallery-plugin -->
 
 </body>
-
+<div class="se-pre-con" style="display:none"></div>
 </html>
