@@ -4,6 +4,7 @@ function comparethis() {
  
     array1 = array1.split("\n");
     array2 = array2.split("\n");
+    showShare();
     compare(array1, array2);
  }
 
